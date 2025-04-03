@@ -1,7 +1,7 @@
 apiVersion: autopilot.k0sproject.io/v1beta2
 kind: UpdateConfig
 metadata:
-  name: updateEdge
+  name: update-edge
   namespace: kube-system
 spec:
   channel: edge_release
