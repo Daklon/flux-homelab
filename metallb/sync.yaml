@@ -22,6 +22,7 @@ spec:
         kind: HelmRepository
         name: metallb
   targetNamespace: metallb-system
-  install: {}
+  install:
+    createNamespace: true
   interval: 10m0s
 
