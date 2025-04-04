@@ -1,5 +1,5 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta1
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: metallb
@@ -7,9 +7,8 @@ metadata:
 spec:
   interval: 10m0s
   url: https://metallb.github.io/metallb
-
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: metallb
@@ -18,6 +17,7 @@ spec:
   chart:
     spec:
       chart: metallb
+      reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
         name: metallb
@@ -27,4 +27,3 @@ spec:
     remediation:
       retries: -1
   interval: 10m0s
-
