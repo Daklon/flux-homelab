@@ -21,6 +21,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: metallb
+  targetNamespace: metallb-system
   install: {}
   interval: 10m0s
 
