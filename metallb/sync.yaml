@@ -24,5 +24,7 @@ spec:
   targetNamespace: metallb-system
   install:
     createNamespace: true
+    remediation:
+      retries: -1
   interval: 10m0s
 
