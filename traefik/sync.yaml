@@ -17,7 +17,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: traefik
+      chart: traefik/traefik
       sourceRef:
         kind: HelmRepository
         name: traefik
