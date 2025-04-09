@@ -29,3 +29,8 @@ spec:
       retries: 1
   interval: 10m0s
   values:
+    grafana:
+     ingress:
+       enabled: true
+       hosts:
+         - grafana.admin.ad
