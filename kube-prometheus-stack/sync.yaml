@@ -35,18 +35,11 @@ spec:
           domain: "grafana.admin.ad"
           root_url: "http://grafana.admin.ad"
           serve_from_sub_path: false
-        auth:
-          cookie_secure: false
+        #auth:
+          #cookie_secure: false
       ingress:
         enabled: true
         hosts:
           - grafana.admin.ad
         paths:
           - /
-        annotations:
-          #traefik.ingress.kubernetes.io/router.entrypoints: web
-          #traefik.ingress.kubernetes.io/service.upgradable: "true"
-          #traefik.ingress.kubernetes.io/service.transport: "http@kubernetescrd"
-          #traefik.ingress.kubernetes.io/server-transport.respondtimeout: "3600s"
-          #traefik.ingress.kubernetes.io/server-transport.keepalive.maxconnectionidletimeout: "3600s"
-          #traefik.ingress.kubernetes.io/preserve-host: "true"
