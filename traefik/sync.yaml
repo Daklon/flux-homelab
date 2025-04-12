@@ -28,3 +28,7 @@ spec:
     remediation:
       retries: 1
   interval: 10m0s
+  values:
+    ingressRoute:
+      dashboard:
+        enabled: true
