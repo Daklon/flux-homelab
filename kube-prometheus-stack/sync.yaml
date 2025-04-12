@@ -39,6 +39,8 @@ spec:
        enabled: true
        hosts:
          - grafana.admin.ad
+      paths:
+        - /
        annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
           traefik.ingress.kubernetes.io/service.upgradable: "true"
