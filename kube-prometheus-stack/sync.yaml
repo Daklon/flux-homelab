@@ -30,7 +30,12 @@ spec:
   interval: 10m0s
   values:
     grafana:
-     ingress:
+      grafana.ini:
+        server:
+          domain: "grafana.admin.ad"
+          root_url: "http://grafana.admin.ad/"
+          serve_from_sub_path: false
+      ingress:
        enabled: true
        hosts:
          - grafana.admin.ad
