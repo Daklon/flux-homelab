@@ -49,3 +49,4 @@ spec:
         traefik.ingress.kubernetes.io/service.transport: "http@kubernetescrd"
         traefik.ingress.kubernetes.io/server-transport.respondtimeout: "3600s"
         traefik.ingress.kubernetes.io/server-transport.keepalive.maxconnectionidletimeout: "3600s"
+        traefik.ingress.kubernetes.io/preserve-host: "true"
