@@ -44,9 +44,9 @@ spec:
         paths:
           - /
         annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-          traefik.ingress.kubernetes.io/service.upgradable: "true"
-          traefik.ingress.kubernetes.io/service.transport: "http@kubernetescrd"
-          traefik.ingress.kubernetes.io/server-transport.respondtimeout: "3600s"
-          traefik.ingress.kubernetes.io/server-transport.keepalive.maxconnectionidletimeout: "3600s"
+          traefik.ingress.kubernetes.io/router.entrypoints: web
+          #traefik.ingress.kubernetes.io/service.upgradable: "true"
+          #traefik.ingress.kubernetes.io/service.transport: "http@kubernetescrd"
+          #traefik.ingress.kubernetes.io/server-transport.respondtimeout: "3600s"
+          #traefik.ingress.kubernetes.io/server-transport.keepalive.maxconnectionidletimeout: "3600s"
           traefik.ingress.kubernetes.io/preserve-host: "true"
