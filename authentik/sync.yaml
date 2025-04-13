@@ -1,0 +1,48 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: authentik
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://charts.jetstack.io
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authentik
+  namespace: flux-system
+spec:
+  releaseName: authentik
+  chart:
+    spec:
+      chart: authentik
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: authentik
+  targetNamespace: authentik
+  install:
+    createNamespace: true
+    remediation:
+      retries: 1
+  interval: 10m0s
+  values:
+    authentik:
+      secret_key: "DTrQpBt1E3Msh+V5uHu8T/t8uL6QzpxGfsUvlj0DBqqlK9MBqlr/URWkP2tF+zElRjAcGaePno9yeY0k"
+      error_reporting:
+        enabled: false
+      postgresql:
+        password: "zDkfdGNb9V5sSs9E/Pwsaa8D7N7KUcFZU5u7QNwIUxUU5ZUUTxcYogPanGAQRuZKHSovIOa6dDSd7mrB"
+    server:
+      ingress:
+        enabled: true
+        hosts:
+          - auth.admin.ad
+    postgresql:
+      enabled: true
+      auth:
+        password: "zDkfdGNb9V5sSs9E/Pwsaa8D7N7KUcFZU5u7QNwIUxUU5ZUUTxcYogPanGAQRuZKHSovIOa6dDSd7mrB"
+    redis:
+      enabled: true
