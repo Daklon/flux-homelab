@@ -7,8 +7,8 @@ spec:
     interval: 10m0s
     url: https://kubernetes-sigs.github.io/external-dns/
 sops:
-    lastmodified: "2025-04-13T17:50:00Z"
-    mac: ENC[AES256_GCM,data:iBRRWnYS5irEq7mj+hbL4ZbQiFQEoaP246LiKnD80fDeO2tuz9Ym2FSfubDLOF1aUGYTc+6K1s1PvHbyVJuA/q7kFtdyskxdYaX+O+UISXFB9o5ilW9KsI9wxwaEWY9MEArGOzILumcNxf7A1t47vKue65b67KofSe3Dkxo4YF4=,iv:c6fsmh79byVOPD9zuENniEW7opONNWE1Uqkxg6YVGJc=,tag:gYG9/j0Tu3UjuYuYeqfO/w==,type:str]
+    lastmodified: "2025-04-13T17:51:54Z"
+    mac: ENC[AES256_GCM,data:3pLROAFkWmKFzOnp/tOggda4vr7mnhmMZa6T79+3jbUZwhOsxEiWMBsWx/rH18qnDKk46P/JDpq3uv2gzdSYy8iSqR74ptnocjxeiMbdqRMcJzQx71N8gK8oPhagMpOdnpUvKINmKjKjDXfFdWcg6vB7VEFHejbDhary6F4nhUc=,iv:Lu/N+LOdTOeFMOeQ/2eI6IeAoTbLCrzuXdnErUyEWhE=,tag:ivsw7p2DxSLA9ysa3630Gg==,type:str]
     pgp:
         - created_at: "2025-04-13T17:49:24Z"
           enc: |-
@@ -51,12 +51,12 @@ spec:
         registry: noop
         policy: sync
         extraArgs:
-            - ENC[AES256_GCM,data:rlGVwFGEHbDRMtTU9rcoks6V12L6,iv:K73fVPAkKw2JOxAVLdlvuSSsPTXhUGEVz86HMxJ8cig=,tag:5RCudGh7hIRWTX8niqaMvA==,type:str]
+            - ENC[AES256_GCM,data:RwEH4awC1tpLmwHRA5s7rQFdJ6obYA==,iv:ONlPMSvqwRxe4vTBiYBc6IlVvjOo2smPhE+WkwmLuRs=,tag:M0xQXVRf41W9ZFLx894Qtw==,type:str]
             - ENC[AES256_GCM,data:g3boeFlsPejMnEFicmbCpSgYjnf5TIVhRmjLnTChah6O,iv:m5YFuwSFs256bJMrAg+3v9qPIt73zOULlo8t600vICY=,tag:OWhTHTqy3mlH4c5o1FwcEA==,type:str]
             - ENC[AES256_GCM,data:VvYg7cEPgH4zUOiENhX2yVJyhwBBf34PzrinFQ==,iv:osfNqZ5uh8C5r2d9hhSE5pW8v/YmF/kI1Ina8VG+28Y=,tag:JkmWEv1W1irTG8AGg8pEAg==,type:str]
 sops:
-    lastmodified: "2025-04-13T17:50:00Z"
-    mac: ENC[AES256_GCM,data:iBRRWnYS5irEq7mj+hbL4ZbQiFQEoaP246LiKnD80fDeO2tuz9Ym2FSfubDLOF1aUGYTc+6K1s1PvHbyVJuA/q7kFtdyskxdYaX+O+UISXFB9o5ilW9KsI9wxwaEWY9MEArGOzILumcNxf7A1t47vKue65b67KofSe3Dkxo4YF4=,iv:c6fsmh79byVOPD9zuENniEW7opONNWE1Uqkxg6YVGJc=,tag:gYG9/j0Tu3UjuYuYeqfO/w==,type:str]
+    lastmodified: "2025-04-13T17:51:54Z"
+    mac: ENC[AES256_GCM,data:3pLROAFkWmKFzOnp/tOggda4vr7mnhmMZa6T79+3jbUZwhOsxEiWMBsWx/rH18qnDKk46P/JDpq3uv2gzdSYy8iSqR74ptnocjxeiMbdqRMcJzQx71N8gK8oPhagMpOdnpUvKINmKjKjDXfFdWcg6vB7VEFHejbDhary6F4nhUc=,iv:Lu/N+LOdTOeFMOeQ/2eI6IeAoTbLCrzuXdnErUyEWhE=,tag:ivsw7p2DxSLA9ysa3630Gg==,type:str]
     pgp:
         - created_at: "2025-04-13T17:49:24Z"
           enc: |-
