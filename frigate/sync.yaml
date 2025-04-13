@@ -31,8 +31,7 @@ spec:
   values:
     ingress:
       enabled: true
-      hosts:
-        - frigate.plasm.es
+      hosts: frigate.plasm.es
     config: |
       mqtt:
         enabled: false
