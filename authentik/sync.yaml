@@ -57,7 +57,7 @@ spec:
             ingress:
                 enabled: true
                 hosts:
-                    - auth.admin.ad
+                    - auth.plasm.es
         postgresql:
             enabled: true
             auth:

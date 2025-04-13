@@ -32,14 +32,14 @@ spec:
     grafana:
       grafana.ini:
         server:
-          domain: "grafana.admin.ad"
-          root_url: "http://grafana.admin.ad"
+          domain: "grafana.plasm.es"
+          root_url: "http://grafana.plasm.es"
           serve_from_sub_path: false
         auth:
           cookie_secure: false
       ingress:
         enabled: true
         hosts:
-          - grafana.admin.ad
+          - grafana.plasm.es
         paths:
           - /
