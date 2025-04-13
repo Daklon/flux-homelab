@@ -61,8 +61,9 @@ spec:
             enabled: true
             auth:
                 password: ENC[AES256_GCM,data:lSwZNAF/ISKdGXUNS6kB2tVSeuLU/elxQWddcpAwFDeT2Cr3+FYrbGzBbSPnTPCV/FuKHkkfhmFeT3sYNpQcX8kMICpXVe1i9k3k8FYa1wI=,iv:94TwA7z0spfpySdAKIkY8aJ212IOKuorlKGHjGswZ9s=,tag:U1VMCu9/KPnFLxpxAAzlcg==,type:str]
-            persistence:
-                storageClass: openebs-hostpath
+            primary:
+                persistence:
+                    storageClass: openebs-hostpath
         redis:
             enabled: true
             master:
