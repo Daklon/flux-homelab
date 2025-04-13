@@ -1,0 +1,68 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: frigate
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://blakeblackshear.github.io/blakeshome-charts/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: frigate
+  namespace: flux-system
+spec:
+  releaseName: frigate
+  chart:
+    spec:
+      chart: frigate
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: frigate
+  targetNamespace: frigate
+  install:
+    createNamespace: true
+    remediation:
+      retries: 1
+  interval: 10m0s
+  values:
+    ingress:
+      enabled: true
+      hosts:
+        - frigate.plasm.es
+    config: |
+      mqtt:
+        enabled: false
+      
+      go2rtc:
+        streams:
+          smar1:
+            - rtsp://admin:admin@192.168.1.30:554/channel=0_stream=0&onvif=0.sdp?real_stream
+            - ffmpeg:back#audio=acc
+          smar1_sub:
+            - rtsp://admin:admin@192.168.1.30:554/channel=0_stream=1&onvif=0.sdp?real_stream
+            - ffmpeg:back#audio=acc
+      
+      cameras:
+        smar1: # <------ Name the camera
+          enabled: true
+          ffmpeg:
+            output_args:
+              record: preset-record-generic-audio-copy
+            inputs:
+              - path: rtsp://127.0.0.1:8554/smar1 # <----- The stream you want to use for detection
+                input_args: preset-rtsp-restream
+                roles:
+                  - record
+              - path: rtsp://127.0.0.1:8554/smar1_sub
+                input_args: preset-rtsp-restream
+                roles:
+                  - detect
+          detect:
+            enabled: false # <---- disable detection until you have a working camera feed
+            width: 1280
+            height: 720
+
