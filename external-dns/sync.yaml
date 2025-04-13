@@ -1,0 +1,74 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+    name: external-dns
+    namespace: flux-system
+spec:
+    interval: 10m0s
+    url: https://kubernetes-sigs.github.io/external-dns/
+sops:
+    lastmodified: "2025-04-13T17:50:00Z"
+    mac: ENC[AES256_GCM,data:iBRRWnYS5irEq7mj+hbL4ZbQiFQEoaP246LiKnD80fDeO2tuz9Ym2FSfubDLOF1aUGYTc+6K1s1PvHbyVJuA/q7kFtdyskxdYaX+O+UISXFB9o5ilW9KsI9wxwaEWY9MEArGOzILumcNxf7A1t47vKue65b67KofSe3Dkxo4YF4=,iv:c6fsmh79byVOPD9zuENniEW7opONNWE1Uqkxg6YVGJc=,tag:gYG9/j0Tu3UjuYuYeqfO/w==,type:str]
+    pgp:
+        - created_at: "2025-04-13T17:49:24Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hF4DwW+vaVwrS2ISAQdApm/Kxu5GpV8aRChTsaSWax1FhLa93GqROblH5BqvJg0w
+            5D0cwcGSQ8Fn9AEQkV0WL5d8ohw4X1iOp64Wt0p7cLKWqC6rfQnoc7MlG/O5t7Kb
+            1GgBCQIQmSzVRsRAdnap4huWr7LaF7S8abLa3OJi1R5DpHEV806PJcvRc+QwCymf
+            2fwrLY6SPuSdvf2AWeQMMPRaQ8oBHCODo2HxIAm0lRaTFixcaI5HJCS8ffgzxO5K
+            eWh6DRJZvuA5Cw==
+            =ermp
+            -----END PGP MESSAGE-----
+          fp: B51175A0392C55BA3A9D508C914AB2CE60624E82
+    encrypted_regex: extraArgs
+    version: 3.10.1
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: external-dns
+    namespace: flux-system
+spec:
+    releaseName: external-dns
+    chart:
+        spec:
+            chart: external-dns
+            reconcileStrategy: ChartVersion
+            sourceRef:
+                kind: HelmRepository
+                name: external-dns
+    targetNamespace: external-dns
+    install:
+        createNamespace: true
+        remediation:
+            retries: 1
+    interval: 10m0s
+    values:
+        provider:
+            name: pi-hole
+        registry: noop
+        policy: sync
+        extraArgs:
+            - ENC[AES256_GCM,data:rlGVwFGEHbDRMtTU9rcoks6V12L6,iv:K73fVPAkKw2JOxAVLdlvuSSsPTXhUGEVz86HMxJ8cig=,tag:5RCudGh7hIRWTX8niqaMvA==,type:str]
+            - ENC[AES256_GCM,data:g3boeFlsPejMnEFicmbCpSgYjnf5TIVhRmjLnTChah6O,iv:m5YFuwSFs256bJMrAg+3v9qPIt73zOULlo8t600vICY=,tag:OWhTHTqy3mlH4c5o1FwcEA==,type:str]
+            - ENC[AES256_GCM,data:VvYg7cEPgH4zUOiENhX2yVJyhwBBf34PzrinFQ==,iv:osfNqZ5uh8C5r2d9hhSE5pW8v/YmF/kI1Ina8VG+28Y=,tag:JkmWEv1W1irTG8AGg8pEAg==,type:str]
+sops:
+    lastmodified: "2025-04-13T17:50:00Z"
+    mac: ENC[AES256_GCM,data:iBRRWnYS5irEq7mj+hbL4ZbQiFQEoaP246LiKnD80fDeO2tuz9Ym2FSfubDLOF1aUGYTc+6K1s1PvHbyVJuA/q7kFtdyskxdYaX+O+UISXFB9o5ilW9KsI9wxwaEWY9MEArGOzILumcNxf7A1t47vKue65b67KofSe3Dkxo4YF4=,iv:c6fsmh79byVOPD9zuENniEW7opONNWE1Uqkxg6YVGJc=,tag:gYG9/j0Tu3UjuYuYeqfO/w==,type:str]
+    pgp:
+        - created_at: "2025-04-13T17:49:24Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hF4DwW+vaVwrS2ISAQdApm/Kxu5GpV8aRChTsaSWax1FhLa93GqROblH5BqvJg0w
+            5D0cwcGSQ8Fn9AEQkV0WL5d8ohw4X1iOp64Wt0p7cLKWqC6rfQnoc7MlG/O5t7Kb
+            1GgBCQIQmSzVRsRAdnap4huWr7LaF7S8abLa3OJi1R5DpHEV806PJcvRc+QwCymf
+            2fwrLY6SPuSdvf2AWeQMMPRaQ8oBHCODo2HxIAm0lRaTFixcaI5HJCS8ffgzxO5K
+            eWh6DRJZvuA5Cw==
+            =ermp
+            -----END PGP MESSAGE-----
+          fp: B51175A0392C55BA3A9D508C914AB2CE60624E82
+    encrypted_regex: extraArgs
+    version: 3.10.1
