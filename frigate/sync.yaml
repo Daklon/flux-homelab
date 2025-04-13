@@ -53,6 +53,20 @@ spec:
             - rtsp://admin:admin@192.168.1.30:554/channel=0_stream=1&onvif=0.sdp?real_stream
             - ffmpeg:back#audio=acc
       
+      record:
+        enabled: True
+        retain:
+          days: 3
+          mode: motion
+        alerts:
+          retain:
+            days: 30
+            mode: motion
+        detections:
+          retain:
+            days: 30
+            mode: motion
+
       cameras:
         smar1: # <------ Name the camera
           enabled: true
@@ -72,17 +86,4 @@ spec:
             enabled: true # <---- disable detection until you have a working camera feed
             width: 1280
             height: 720
-          record:
-            enabled: True
-            retain:
-              days: 3
-              mode: motion
-            alerts:
-              retain:
-                days: 30
-                mode: motion
-            detections:
-              retain:
-                days: 30
-                mode: motion
 
