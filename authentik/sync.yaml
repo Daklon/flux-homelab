@@ -44,5 +44,7 @@ spec:
       enabled: true
       auth:
         password: "zDkfdGNb9V5sSs9E/Pwsaa8D7N7KUcFZU5u7QNwIUxUU5ZUUTxcYogPanGAQRuZKHSovIOa6dDSd7mrB"
+      persistence:
+        storageClass: "openebs-hostpath"
     redis:
       enabled: true
