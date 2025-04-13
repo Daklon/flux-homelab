@@ -45,6 +45,7 @@ spec:
         remediation:
             retries: 1
     interval: 10m0s
+    timeout: 10m
     values:
         authentik:
             secret_key: ENC[AES256_GCM,data:95gwhua4Ko67RFNpHs7frRoJiBvwgsPeS688D9SP4QzGssU4G+8pAmFdvtieAWY9FdMMiFV8kz7VgHCIvlKc+fnE4I5RmnK+BKmyn3h1vRM=,iv:L6v8XImRy4APmqFcgcnyTDYqibqv3GNhCoy6ddq7ruE=,tag:4fu31BCI81S6P0OTUViqnQ==,type:str]
