@@ -57,14 +57,6 @@ spec:
         retain:
           days: 3
           mode: motion
-        alerts:
-          retain:
-            days: 30
-            mode: motion
-        detections:
-          retain:
-            days: 30
-            mode: motion
       cameras:
         smar1: # <------ Name the camera
           enabled: true
