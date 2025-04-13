@@ -7,8 +7,8 @@ spec:
     interval: 10m0s
     url: https://charts.goauthentik.io
 sops:
-    lastmodified: "2025-04-13T13:37:26Z"
-    mac: ENC[AES256_GCM,data:ioUOEWWamLIijalLRX9EpnZFsed/tjdHDTevVE3Qva1Z49d93/AxyD8QonQQo4XyHgwsJE3W2KxrQzQxGayfGNLOEcvXTQebudP+fz9Ixw5nfS3bM+ePJHuAo0aefmwv1dzlU1syGD3rX0ZP3IRGIH2C0/GL0sRxCLV4kegEpoM=,iv:fiwk2s3HHcRMIuZel9UacBDd7Uh3QoY2eaGH8nf63Rg=,tag:a6GAM/m6jy7q7Kap/Tqq4w==,type:str]
+    lastmodified: "2025-04-13T15:59:52Z"
+    mac: ENC[AES256_GCM,data:OritVYFsDTuBnfEtWcy5d0MkBSNQ5hkvNW1/0FztzYp9GliLILJEQ2mOCaT/oECAfmNzxcAhKilPIlKdN7qIgwcWE6TxatB3mM6iA3g3n5wE2yEQJs2YgmnLc4E+x683s7hnss1X1jDm+ug3RrHjPXq2vByxEFMo9iR/wwgOrd8=,iv:USaZ12Aj0lnIEuXeAMMo3CjuEXIi8XawNfz6Oy+JmSk=,tag:IvidCX6kK9+ve0bkrVIEHw==,type:str]
     pgp:
         - created_at: "2025-04-13T13:37:26Z"
           enc: |-
@@ -70,8 +70,8 @@ spec:
                 persistence:
                     storageClass: openebs-hostpath
 sops:
-    lastmodified: "2025-04-13T13:37:26Z"
-    mac: ENC[AES256_GCM,data:ioUOEWWamLIijalLRX9EpnZFsed/tjdHDTevVE3Qva1Z49d93/AxyD8QonQQo4XyHgwsJE3W2KxrQzQxGayfGNLOEcvXTQebudP+fz9Ixw5nfS3bM+ePJHuAo0aefmwv1dzlU1syGD3rX0ZP3IRGIH2C0/GL0sRxCLV4kegEpoM=,iv:fiwk2s3HHcRMIuZel9UacBDd7Uh3QoY2eaGH8nf63Rg=,tag:a6GAM/m6jy7q7Kap/Tqq4w==,type:str]
+    lastmodified: "2025-04-13T15:59:52Z"
+    mac: ENC[AES256_GCM,data:OritVYFsDTuBnfEtWcy5d0MkBSNQ5hkvNW1/0FztzYp9GliLILJEQ2mOCaT/oECAfmNzxcAhKilPIlKdN7qIgwcWE6TxatB3mM6iA3g3n5wE2yEQJs2YgmnLc4E+x683s7hnss1X1jDm+ug3RrHjPXq2vByxEFMo9iR/wwgOrd8=,iv:USaZ12Aj0lnIEuXeAMMo3CjuEXIi8XawNfz6Oy+JmSk=,tag:IvidCX6kK9+ve0bkrVIEHw==,type:str]
     pgp:
         - created_at: "2025-04-13T13:37:26Z"
           enc: |-
