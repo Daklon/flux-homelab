@@ -36,6 +36,10 @@ spec:
           paths:
             - path: '/'
               portName: http
+    persistence:
+      media:
+        enabled: true
+        storageClass: "openebs-hostpath"
     config: |
       mqtt:
         enabled: false
@@ -65,7 +69,20 @@ spec:
                 roles:
                   - detect
           detect:
-            enabled: false # <---- disable detection until you have a working camera feed
+            enabled: true # <---- disable detection until you have a working camera feed
             width: 1280
             height: 720
+          record:
+            enabled: True
+            retain:
+              days: 3
+              mode: motion
+            alerts:
+              retain:
+                days: 30
+                mode: motion
+            detections:
+              retain:
+                days: 30
+                mode: motion
 
