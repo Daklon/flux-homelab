@@ -7,8 +7,8 @@ spec:
     interval: 10m0s
     url: https://kubernetes-sigs.github.io/external-dns/
 sops:
-    lastmodified: "2025-04-13T17:53:26Z"
-    mac: ENC[AES256_GCM,data:QMSg3mGCsrKA5sZgTIWqwmJKhU1C29FmylnJYVLt88g4n5xeUZvBErfuVGr4+wfwzJIxQhC0TzRP+U3qmIjoLUwc5+UKKIPs5bJE+fBceTz1Mp4Gdc5hSkxoS/vk50zFKvaBz97DQ/qV8K/kHAfRvI35MVgoeaYfJHN62WDj3yQ=,iv:GiYP13l+GxSadkp2MfPtw0lKLgyFoRlO11q4VjCo9RQ=,tag:7NzQJNuP8atIcQe9r09Jkw==,type:str]
+    lastmodified: "2025-04-13T17:57:11Z"
+    mac: ENC[AES256_GCM,data:uZjd41MRGXL5yfS1IsZ2laMH81fMb4Fr7/zCOBQE4QsnIIonJktQ6Xs1UiPL59L6XS9pBT1i9KmB5mrVAd/pGYBkK94Skec9thz7ii7MqLWWJJLju+GVoCBiS4smDXbV/pjfPcBvg9kiL/SPoz9TE8jCw6PvXvwqle9fh5IcnBw=,iv:Peyn0ipPBRIIqdfovBtGG3g4oQrcNZu3tZoTLEGEw3Q=,tag:sZ7EoKL8/Vyz0IewmL/iyA==,type:str]
     pgp:
         - created_at: "2025-04-13T17:49:24Z"
           enc: |-
@@ -47,7 +47,7 @@ spec:
     interval: 10m0s
     values:
         provider:
-            name: pi-hole
+            name: pihole
         registry: noop
         policy: sync
         extraArgs:
@@ -55,8 +55,8 @@ spec:
             - ENC[AES256_GCM,data:cWj5es4ncVraPFFRJJdan4KaiY27C9baR0Qp8OShoMoaaBQ=,iv:2Q415AQksV+vosKjSrO+aX/JsaiYlkjwccY8KVdcVjQ=,tag:r9rvwZna7Fdy544H1A38mA==,type:str]
             - ENC[AES256_GCM,data:VvYg7cEPgH4zUOiENhX2yVJyhwBBf34PzrinFQ==,iv:osfNqZ5uh8C5r2d9hhSE5pW8v/YmF/kI1Ina8VG+28Y=,tag:JkmWEv1W1irTG8AGg8pEAg==,type:str]
 sops:
-    lastmodified: "2025-04-13T17:53:26Z"
-    mac: ENC[AES256_GCM,data:QMSg3mGCsrKA5sZgTIWqwmJKhU1C29FmylnJYVLt88g4n5xeUZvBErfuVGr4+wfwzJIxQhC0TzRP+U3qmIjoLUwc5+UKKIPs5bJE+fBceTz1Mp4Gdc5hSkxoS/vk50zFKvaBz97DQ/qV8K/kHAfRvI35MVgoeaYfJHN62WDj3yQ=,iv:GiYP13l+GxSadkp2MfPtw0lKLgyFoRlO11q4VjCo9RQ=,tag:7NzQJNuP8atIcQe9r09Jkw==,type:str]
+    lastmodified: "2025-04-13T17:57:11Z"
+    mac: ENC[AES256_GCM,data:uZjd41MRGXL5yfS1IsZ2laMH81fMb4Fr7/zCOBQE4QsnIIonJktQ6Xs1UiPL59L6XS9pBT1i9KmB5mrVAd/pGYBkK94Skec9thz7ii7MqLWWJJLju+GVoCBiS4smDXbV/pjfPcBvg9kiL/SPoz9TE8jCw6PvXvwqle9fh5IcnBw=,iv:Peyn0ipPBRIIqdfovBtGG3g4oQrcNZu3tZoTLEGEw3Q=,tag:sZ7EoKL8/Vyz0IewmL/iyA==,type:str]
     pgp:
         - created_at: "2025-04-13T17:49:24Z"
           enc: |-
