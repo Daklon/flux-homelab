@@ -33,6 +33,9 @@ spec:
       enabled: true
       hosts: 
         - host: frigate.plasm.es
+          paths:
+            - path: '/'
+              portName: http
     config: |
       mqtt:
         enabled: false
