@@ -38,13 +38,13 @@ spec:
         acmeServerUrl: https://acme-v02.api.letsencrypt.org/directory
         ovhEndpointName: ovh-eu
         ovhAuthenticationRef:
-          applicationKeySecretRef:
+          applicationKeyRef:
             name: ovh-credentials
             key: OVH_APPLICATION_KEY
-          applicationSecretSecretRef:
+          applicationSecretRef:
             name: ovh-credentials
             key: OVH_APPLICATION_SECRET
-          consumerKeySecretRef:
+          consumerKeyRef:
             name: ovh-credentials
             key: OVH_CONSUMER_KEY
 
