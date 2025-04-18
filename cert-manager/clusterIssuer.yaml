@@ -1,0 +1,31 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: plasm-es
+  namespace: cert-manager
+spec:
+  acme:
+    email: muchorrollodejavi@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-plasm-es
+    solvers:
+    - dns01:
+        webhook:
+          groupName: ovh
+          solverName: ovh
+          config:
+            endpoint: ovh-eu  # "ovh-eu", "ovh-ca" o "ovh-us"
+            applicationKeySecretRef:
+              name: ovh-credentials
+              key: OVH_APPLICATION_KEY
+            applicationSecretSecretRef:
+              name: ovh-credentials
+              key: OVH_APPLICATION_SECRET
+            consumerKeySecretRef:
+              name: ovh-credentials
+              key: OVH_CONSUMER_KEY
+            ttl: 600
+      selector:
+        dnsZones:
+          - "plasm.es"
