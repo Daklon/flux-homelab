@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  url: https://cert-manager-webhook-ovh.github.io
+  url: https://aureq.github.io/cert-manager-webhook-ovh/
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
