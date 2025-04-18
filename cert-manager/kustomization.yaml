@@ -4,4 +4,3 @@ resources:
 - sync.yaml
 - secret.yaml
 - cert-manager-webhook-ovh.yaml
-- clusterIssuer.yaml

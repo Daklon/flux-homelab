@@ -30,3 +30,21 @@ spec:
   interval: 10m0s
   values:
     configVersion: 0.0.1
+    issuers:
+      - name: ovh
+        create: true
+        kind: ClusterIssuer
+        email: muchorrollodejavi@gmail.com
+        acmeServerUrl: https://acme-v02.api.letsencrypt.org/directory
+        ovhEndpointName: ovh-eu
+        ovhAuthenticationRef:
+          applicationKeySecretRef:
+            name: ovh-credentials
+            key: OVH_APPLICATION_KEY
+          applicationSecretSecretRef:
+            name: ovh-credentials
+            key: OVH_APPLICATION_SECRET
+          consumerKeySecretRef:
+            name: ovh-credentials
+            key: OVH_CONSUMER_KEY
+
