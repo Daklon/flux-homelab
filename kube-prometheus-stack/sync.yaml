@@ -33,13 +33,17 @@ spec:
       grafana.ini:
         server:
           domain: "grafana.plasm.es"
-          root_url: "http://grafana.plasm.es"
+          root_url: "https://grafana.plasm.es"
           serve_from_sub_path: false
-        auth:
-          cookie_secure: false
       ingress:
         enabled: true
         hosts:
           - grafana.plasm.es
         paths:
           - /
+        tls:
+          - secretName: "grafana-tls"
+            hosts:
+              - grafana.plasm.es
+        annotations:
+          cert-manager.io/cluster-issuer: ovh
