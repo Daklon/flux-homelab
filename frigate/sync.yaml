@@ -36,6 +36,12 @@ spec:
           paths:
             - path: '/'
               portName: http
+      tls:
+        - secretName: "firgate-tls"
+          hosts:
+            - frigate.plasm.es
+      annotations:
+        cert-manager.io/cluster-issuer: ovh
     persistence:
       media:
         enabled: true
