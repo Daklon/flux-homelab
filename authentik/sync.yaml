@@ -63,7 +63,7 @@ spec:
                     hosts:
                       - auth.plasm.es
                 annotations:
-                  cert-manager.io/cluster-issuer: plasm-es
+                  cert-manager.io/cluster-issuer: ovh
         postgresql:
             enabled: true
             auth:
