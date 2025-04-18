@@ -58,6 +58,12 @@ spec:
                 enabled: true
                 hosts:
                     - auth.plasm.es
+                tls:
+                  - secretName: "authentik-tls"
+                    hosts:
+                      - auth.plasm.es
+                annotations:
+                  cert-manager.io/cluster-issuer: plasm-es
         postgresql:
             enabled: true
             auth:
