@@ -30,6 +30,8 @@ spec:
       retries: 1
   interval: 10m0s
   values:
+    image:
+      tag: 0.16.1
     ingress:
       enabled: true
       hosts: 
