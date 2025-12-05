@@ -31,7 +31,7 @@ spec:
   interval: 10m0s
   values:
     image:
-      tag: 0.16.1
+      tag: 0.16.2
     ingress:
       enabled: true
       hosts: 
@@ -74,11 +74,30 @@ spec:
           smar1_sub:
             - rtsp://admin:admin@192.168.1.30:554/channel=0_stream=1&onvif=0.sdp?real_stream
             - ffmpeg:back#audio=acc 
+          smar2:
+            - rtsp://admin:admin@192.168.1.10:554/channel=0_stream=0&onvif=0.sdp?real_stream
+            - ffmpeg:back#audio=acc
+          smar2_sub:
+            - rtsp://admin:admin@192.168.1.10:554/channel=0_stream=1&onvif=0.sdp?real_stream
+            - ffmpeg:back#audio=acc 
       record:
         enabled: True
         retain:
           days: 3
           mode: motion
+      snapshots:
+        # Optional: Enable writing jpg snapshot to /media/frigate/clips (default: shown below)
+        enabled: True
+        # Optional: save a clean PNG copy of the snapshot image (default: shown below)
+        clean_copy: True
+        # Optional: print a timestamp on the snapshots (default: shown below)
+        timestamp: True
+        # Optional: draw bounding box on the snapshots (default: shown below)
+        bounding_box: True
+        # Optional: crop the snapshot (default: shown below)
+        crop: False
+        # Optional: quality of the encoded jpeg, 0-100 (default: shown below)
+        quality: 70
       cameras:
         smar1: # <------ Name the camera
           enabled: true
@@ -91,6 +110,24 @@ spec:
                 roles:
                   - record
               - path: rtsp://127.0.0.1:8554/smar1_sub
+                input_args: preset-rtsp-restream
+                roles:
+                  - detect
+          detect:
+            enabled: true # <---- disable detection until you have a working camera feed
+            width: 1280
+            height: 720
+        smar2: # <------ Name the camera
+          enabled: true
+          ffmpeg:
+            output_args:
+              record: preset-record-generic-audio-copy
+            inputs:
+              - path: rtsp://127.0.0.1:8554/smar2 # <----- The stream you want to use for detection
+                input_args: preset-rtsp-restream
+                roles:
+                  - record
+              - path: rtsp://127.0.0.1:8554/smar2_sub
                 input_args: preset-rtsp-restream
                 roles:
                   - detect
