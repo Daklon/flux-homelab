@@ -84,7 +84,15 @@ spec:
         enabled: True
         retain:
           days: 3
-          mode: motion
+          mode: all
+        alerts:
+          retain:
+            days: 30
+            mode: motion
+        detections:
+          retain:
+            days: 30
+            mode: motion
       snapshots:
         # Optional: Enable writing jpg snapshot to /media/frigate/clips (default: shown below)
         enabled: True
