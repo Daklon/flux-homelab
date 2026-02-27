@@ -1,0 +1,89 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: ollama-helm
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://otwld.github.io/ollama-helm/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ollama
+  namespace: flux-system
+spec:
+  releaseName: ollama
+  chart:
+    spec:
+      chart: ollama
+      version: "0.54.0"
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: ollama-helm
+  targetNamespace: ollama
+  install:
+    createNamespace: true
+    remediation:
+      retries: 1
+  interval: 10m0s
+  values:
+    image:
+      repository: ollama/ollama
+      tag: ""
+      pullPolicy: IfNotPresent
+
+    ollama:
+      gpu:
+        enabled: false
+      models:
+        pull:
+          - "smollm:135m"
+        run:
+          - "smollm:135m"
+      mountPath: ""
+
+    resources:
+      requests:
+        memory: "1024Mi"
+        cpu: "500m"
+      limits:
+        memory: "1536Mi"
+        cpu: "1000m"
+
+    persistentVolume:
+      enabled: false
+
+    livenessProbe:
+      enabled: true
+      initialDelaySeconds: 40
+    readinessProbe:
+      enabled: true
+      initialDelaySeconds: 20
+
+    # --- Ingress configuration (añadido) ---
+    ingress:
+      enabled: true
+      # opcional: si tu Ingress Controller se registra con otra clase, cámbialo
+      ingressClassName: nginx
+      annotations:
+        # Descomenta/ajusta si usas cert-manager:
+        cert-manager.io/cluster-issuer: "ovh"
+      hosts:
+        - host: ollama.plasm.es
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - ollama.plasm.es
+          # asegúrate de que este secret exista o de que cert-manager lo cree
+          secretName: ollama-plasm-es-tls
+
+    # nodeSelector/tolerations/affinity quedan como en el ejemplo anterior (comentados)
+    # nodeSelector:
+    #   kubernetes.io/hostname: "small-node-01"
+    # tolerations: []
+    # affinity: {}
