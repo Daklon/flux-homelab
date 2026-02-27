@@ -32,22 +32,22 @@ spec:
   interval: 10m0s
   values:
     app-template:
-      persistence:
-        enabled: true
-        storageClass: "openebs-hostpath"
-        size: 1Gi
-        accessMode: ReadWriteOnce
-      # Configuración del Ingress para OpenClaw
-      ingress:
-        main:
-          enabled: true
-          clssName: traefik
-          hosts:
-            - host: openclaw.plasm.es
-              paths:
-                - path: /
-                  pathType: Prefix
-          tls:
-            - hosts:
-                - openclaw.plasm.es
-              secretName: openclaw-plasm-es-tls
+  persistence:
+    data:
+      enabled: true
+      storageClass: "openebs-hostpath"
+      size: 1Gi
+      accessMode: ReadWriteOnce
+  # Configuración del Ingress para OpenClaw
+  ingress:
+    main:
+      enabled: true
+      hosts:
+        - host: openclaw.plasm.es
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - openclaw.plasm.es
+          secretName: openclaw-plasm-es-tls
