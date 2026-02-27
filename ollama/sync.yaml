@@ -18,7 +18,7 @@ spec:
   chart:
     spec:
       chart: ollama
-      version: "0.54.0"
+      version: "1.46.0"
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
@@ -30,11 +30,6 @@ spec:
       retries: 1
   interval: 10m0s
   values:
-    image:
-      repository: ollama/ollama
-      tag: ""
-      pullPolicy: IfNotPresent
-
     ollama:
       gpu:
         enabled: false
@@ -54,18 +49,14 @@ spec:
         cpu: "1000m"
 
     persistentVolume:
-      enabled: false
-
-    livenessProbe:
       enabled: true
-      initialDelaySeconds: 40
-    readinessProbe:
-      enabled: true
-      initialDelaySeconds: 20
+      storageClass: "openebs-hostpath"
+      size: 30Gi
 
     # --- Ingress configuration (añadido) ---
     ingress:
       enabled: true
+      className: traefik
       annotations:
         cert-manager.io/cluster-issuer: "ovh"
       hosts:
@@ -78,9 +69,3 @@ spec:
             - ollama.plasm.es
           # asegúrate de que este secret exista o de que cert-manager lo cree
           secretName: ollama-plasm-es-tls
-
-    # nodeSelector/tolerations/affinity quedan como en el ejemplo anterior (comentados)
-    # nodeSelector:
-    #   kubernetes.io/hostname: "small-node-01"
-    # tolerations: []
-    # affinity: {}
