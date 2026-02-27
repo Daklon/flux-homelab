@@ -49,3 +49,9 @@ spec:
             - hosts:
                 - openclaw.plasm.es
               secretName: openclaw-plasm-es-tls
+      controllers:
+        main:
+          containers:
+            main:
+              env:
+                GATEWAY_CONTROLUI_ALLOWEDORIGINS: "https://openclaw.plasm.es"
