@@ -162,3 +162,4 @@ spec:
             main:
               env:
                 GATEWAY_CONTROLUI_ALLOWEDORIGINS: '["https://openclaw.plasm.es"]'
+                GATEWAY_CONTROLUI_DANGEROUSLYALLOWHOSTHEADERORIGINFALLBACK: true
