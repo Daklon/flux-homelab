@@ -66,10 +66,7 @@ spec:
     # --- Ingress configuration (añadido) ---
     ingress:
       enabled: true
-      # opcional: si tu Ingress Controller se registra con otra clase, cámbialo
-      ingressClassName: nginx
       annotations:
-        # Descomenta/ajusta si usas cert-manager:
         cert-manager.io/cluster-issuer: "ovh"
       hosts:
         - host: ollama.plasm.es

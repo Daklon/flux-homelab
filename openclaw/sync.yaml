@@ -1,0 +1,63 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: openclaw-helm
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://serhanekicii.github.io/openclaw-helm/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: openclaw
+  namespace: flux-system
+spec:
+  releaseName: openclaw
+  chart:
+    spec:
+      chart: openclaw
+      # He omitido la versión para que use la última disponible, 
+      # pero puedes fijarla si prefieres estabilidad.
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: openclaw-helm
+  targetNamespace: openclaw
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  interval: 10m0s
+  values:
+    # Configuración del Ingress para OpenClaw
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: "ovh"
+      hosts:
+        - host: openclaw.plasm.es
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - openclaw.plasm.es
+          secretName: openclaw-plasm-es-tls
+
+    # Recursos (ajustados para una app web ligera)
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+
+    # env:
+    #   - name: OPENAI_API_KEY
+    #     valueFrom:
+    #       secretKeyRef:
+    #         name: openclaw-secrets
+    #         key: api-key
