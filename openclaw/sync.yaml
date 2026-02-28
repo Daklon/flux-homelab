@@ -72,11 +72,26 @@ spec:
 
                 // Agent configuration
                 "agents": {
+                  "providers": {
+                    "ollama": {
+                      "baseUrl": "http://ollama-host:11434",
+                      "api": "ollama",
+                      "models": [
+                        {
+                          "id": "smollm:135m",
+                          "name": "smollm",
+                          "reasoning": false,
+                          "input": ["text"],
+                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+                        }
+                      ]
+                    }
+                  },
                   "defaults": {
                     "workspace": "/home/node/.openclaw/workspace",
                     "model": {
                       // Uses ANTHROPIC_API_KEY from environment
-                      "primary": "anthropic/claude-opus-4-6"
+                      "primary": "ollama/smollm"
                     },
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
