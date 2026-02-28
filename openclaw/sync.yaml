@@ -150,6 +150,8 @@ spec:
       ingress:
         main:
           enabled: true
+          annotations:
+            cert-manager.io/cluster-issuer: ovh
           hosts:
             - host: openclaw.plasm.es
               paths:
