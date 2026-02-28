@@ -71,7 +71,7 @@ spec:
                 },
                 "providers": {
                   "ollama": {
-                    "baseUrl": "http://ollama-host:11434",
+                    "baseUrl": "http://ollama.ollama.svc.cluster.local:11434",
                     "api": "ollama",
                     "models": [
                       {
