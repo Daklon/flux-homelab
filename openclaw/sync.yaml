@@ -107,7 +107,8 @@ spec:
                     "workspace": "/home/node/.openclaw/workspace",
                     "model": {
                       // Uses ANTHROPIC_API_KEY from environment
-                      "primary": "ollama/smollm"
+                      "primary": "model/zai-org/GLM-5-FP8",
+                      "fallbacks": ["ollama/smollm:135m"]
                     },
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
