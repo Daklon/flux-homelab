@@ -36,8 +36,12 @@ spec:
       models:
         pull:
           - "smollm:135m"
+          - "qwen3:0.6b"
+          - "qwen2.5:0.5b"
+          - "llama3.2:3b"
+          - "llama3-groq-tool-use:8B"
         run:
-          - "smollm:135m"
+          - "qwen3:0.6b"
       mountPath: ""
 
     resources:

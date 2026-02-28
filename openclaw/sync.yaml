@@ -77,12 +77,33 @@ spec:
                       "api": "ollama",
                       "models": [
                         {
-                          "id": "smollm:135m",
-                          "name": "smollm",
+                          "id": "qwen3:0.6b",
+                          "name": "qwen3:0.6b",
                           "reasoning": false,
                           "input": ["text"],
                           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
-                        }
+                        },
+                        {
+                          "id": "qwen2.5:0.5b",
+                          "name": "qwen2.5:0.5b",
+                          "reasoning": false,
+                          "input": ["text"],
+                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+                        },
+                        {
+                          "id": "llama3.2:3b",
+                          "name": "llama3.2:3b",
+                          "reasoning": false,
+                          "input": ["text"],
+                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+                        },
+                        {
+                          "id": "llama3-groq-tool-use:8B",
+                          "name": "llama3-groq-tool-use:8B",
+                          "reasoning": false,
+                          "input": ["text"],
+                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+                        },
                       ]
                     },
                     "model": {
@@ -108,7 +129,7 @@ spec:
                     "model": {
                       // Uses ANTHROPIC_API_KEY from environment
                       "primary": "model/zai-org/GLM-5-FP8",
-                      "fallbacks": ["ollama/smollm:135m"]
+                      "fallbacks": ["ollama/qwen3:0.6b", "qwen2.5:0.5b", "llama3.2:3b", "llama3-groq-tool-use:8B"]
                     },
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
