@@ -69,19 +69,21 @@ spec:
                     }
                   }
                 },
-                "providers": {
-                  "ollama": {
-                    "baseUrl": "http://ollama.ollama.svc.cluster.local:11434",
-                    "api": "ollama",
-                    "models": [
-                      {
-                        "id": "smollm:135m",
-                        "name": "smollm",
-                        "reasoning": false,
-                        "input": ["text"],
-                        "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
-                      }
-                    ]
+                "models":
+                  "providers": {
+                    "ollama": {
+                      "baseUrl": "http://ollama.ollama.svc.cluster.local:11434",
+                      "api": "ollama",
+                      "models": [
+                        {
+                          "id": "smollm:135m",
+                          "name": "smollm",
+                          "reasoning": false,
+                          "input": ["text"],
+                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+                        }
+                      ]
+                    }
                   }
                 },
                 // Agent configuration
