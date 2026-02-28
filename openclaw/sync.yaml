@@ -73,6 +73,7 @@ spec:
                   "providers": {
                     "ollama": {
                       "baseUrl": "http://ollama.ollama.svc.cluster.local:11434",
+                      "apiKey": "ollama-local",
                       "api": "ollama",
                       "models": [
                         {
@@ -80,6 +81,20 @@ spec:
                           "name": "smollm",
                           "reasoning": false,
                           "input": ["text"],
+                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+                        }
+                      ]
+                    },
+                    "model": {
+                      //should use MODEL_API_KEY from environment
+                      "baseUrl": "https://api.us-west-2.modal.direct/",
+                      "api": "model",
+                      "models": [
+                        {
+                          "id": ":1.0",
+                          "name": "model-glm-5",
+                          "reasoning": true,
+                          "input": ["text", "tool"],
                           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
                         }
                       ]
@@ -181,6 +196,7 @@ spec:
         main:
           containers:
             main:
-              env:
-                GATEWAY_CONTROLUI_ALLOWEDORIGINS: '["https://openclaw.plasm.es"]'
-                GATEWAY_CONTROLUI_DANGEROUSLYALLOWHOSTHEADERORIGINFALLBACK: true
+              envFrom:
+                - secretRef:
+                    name: openclaw-env-secret
+                
