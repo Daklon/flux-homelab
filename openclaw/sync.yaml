@@ -84,6 +84,13 @@ spec:
                           "contextWindow": 50000,
                           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
                         },
+                        {
+                          "id": "lfm2.5-thinking:1.2b",
+                          "name": "lfm2.5-thinking:1.2b",
+                          "reasoning": false,
+                          "input": ["text"],
+                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+                        }
                       ]
                     },
                     "nvidia-kimi": {
