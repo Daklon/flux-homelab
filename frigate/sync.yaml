@@ -30,7 +30,7 @@ spec:
       retries: 1
   interval: 10m0s
   values:
-    replicaCount: 0
+    replicaCount: 1
     image:
       tag: 0.16.3
     ingress:
