@@ -69,7 +69,7 @@ spec:
                     }
                   }
                 },
-                "models":
+                "models": {
                   "providers": {
                     "ollama": {
                       "baseUrl": "http://ollama.ollama.svc.cluster.local:11434",
