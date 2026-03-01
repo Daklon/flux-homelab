@@ -77,37 +77,16 @@ spec:
                       "api": "ollama",
                       "models": [
                         {
-                          "id": "qwen3:0.6b",
-                          "name": "qwen3:0.6b",
-                          "reasoning": false,
-                          "input": ["text"],
-                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
-                        },
-                        {
                           "id": "qwen2.5:0.5b",
                           "name": "qwen2.5:0.5b",
                           "reasoning": false,
                           "input": ["text"],
                           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
                         },
-                        {
-                          "id": "llama3.2:3b",
-                          "name": "llama3.2:3b",
-                          "reasoning": false,
-                          "input": ["text"],
-                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
-                        },
-                        {
-                          "id": "llama3-groq-tool-use:8B",
-                          "name": "llama3-groq-tool-use:8B",
-                          "reasoning": false,
-                          "input": ["text"],
-                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
-                        },
                       ]
                     },
-                    "model": {
-                      //should use MODEL_API_KEY from environment
+                    "modal": {
+                      //should use MODAL_API_KEY from environment
                       "baseUrl": "https://api.us-west-2.modal.direct/",
                       "apiKey": "${MODEL_API_KEY}",
                       "api": "openai-completions",
@@ -129,8 +108,8 @@ spec:
                     "workspace": "/home/node/.openclaw/workspace",
                     "model": {
                       // Uses ANTHROPIC_API_KEY from environment
-                      "primary": "model/zai-org/GLM-5-FP8",
-                      "fallbacks": ["ollama/qwen3:0.6b", "qwen2.5:0.5b", "llama3.2:3b", "llama3-groq-tool-use:8B"]
+                      "primary": "modal/zai-org/GLM-5-FP8",
+                      "fallbacks": ["ollama/qwen2.5:0.5b"]
                     },
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
