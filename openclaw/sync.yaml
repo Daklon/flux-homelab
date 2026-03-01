@@ -81,7 +81,7 @@ spec:
                           "name": "opmo",
                           "reasoning": false,
                           "input": ["text"],
-                          "contextWindow": 262144,
+                          "contextWindow": 2048,
                           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
                         },
                       ]
