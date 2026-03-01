@@ -87,7 +87,7 @@ spec:
                     },
                     "modal": {
                       //should use MODAL_API_KEY from environment
-                      "baseUrl": "https://api.us-west-2.modal.direct/v1",
+                      "baseUrl": "https://api.us-west-2.modal.direct/v1/",
                       "apiKey": "${MODEL_API_KEY}",
                       "api": "openai-completions",
                       "models": [
@@ -108,9 +108,9 @@ spec:
                     "workspace": "/home/node/.openclaw/workspace",
                     "model": {
                       // Uses ANTHROPIC_API_KEY from environment
-                      //"primary": "modal/zai-org/GLM-5-FP8",
+                      "primary": "modal/zai-org/GLM-5-FP8",
                       //"fallbacks": ["ollama/qwen2.5:0.5b"]
-                      "primary": "ollama/qwen2.5:0.5b"
+                      //"primary": "ollama/qwen2.5:0.5b"
                     },
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
