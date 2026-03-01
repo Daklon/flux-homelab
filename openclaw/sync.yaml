@@ -87,7 +87,7 @@ spec:
                       ]
                     },
                     "nvidia-kimi": {
-                      "baseUrl": "http://integrate.api.nvidia.com/v1/",
+                      "baseUrl": "https://integrate.api.nvidia.com/v1/",
                       "apiKey": "${NVIDIA_API_KEY}",
                       "api": "openai-completions",
                       "models": [
@@ -126,11 +126,12 @@ spec:
                     "model": {
                       
                       "primary": "nvidia-kimi/moonshotai/kimi-k2.5",
-                      "fallbacks": ["ollama/opmo", "modal/zai-org/GLM-5-FP8"]
+                      "fallbacks": ["modal/zai-org/GLM-5-FP8", "ollama/opmo"]
                     },
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
-                    "maxConcurrent": 1
+                    "maxConcurrent": 1,
+                    "typingTtlSeconds": 0
                   },
                   "list": [
                     {
