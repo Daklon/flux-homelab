@@ -77,8 +77,8 @@ spec:
                       "api": "ollama",
                       "models": [
                         {
-                          "id": "voytas26/openclaw-qwen3vl-8b-opt:latest",
-                          "name": "voytas26/openclaw-qwen3vl-8b-opt:latest",
+                          "id": "voytas26/openclaw-qwen3vl-8b-opt",
+                          "name": "voytas26/openclaw-qwen3vl-8b-opt",
                           "reasoning": false,
                           "input": ["text"],
                           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
@@ -110,7 +110,7 @@ spec:
                       // Uses ANTHROPIC_API_KEY from environment
                       //"primary": "modal/zai-org/GLM-5-FP8",
                       //"fallbacks": ["ollama/qwen2.5:0.5b"]
-                      "primary": "ollama/voytas26/openclaw-qwen3vl-8b-opt:latest"
+                      "primary": "ollama/voytas26/openclaw-qwen3vl-8b-opt"
                     },
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
