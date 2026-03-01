@@ -108,8 +108,9 @@ spec:
                     "workspace": "/home/node/.openclaw/workspace",
                     "model": {
                       // Uses ANTHROPIC_API_KEY from environment
-                      "primary": "modal/zai-org/GLM-5-FP8",
-                      "fallbacks": ["ollama/qwen2.5:0.5b"]
+                      //"primary": "modal/zai-org/GLM-5-FP8",
+                      //"fallbacks": ["ollama/qwen2.5:0.5b"]
+                      "primary": "ollama/qwen2.5:0.5b"
                     },
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
@@ -159,19 +160,13 @@ spec:
                 }
 
                 // Channel configuration can be added here:
-                // "channels": {
-                //   "telegram": {
-                //     "botToken": "${TELEGRAM_BOT_TOKEN}",
-                //     "enabled": true
-                //   },
-                //   "discord": {
-                //     "token": "${DISCORD_BOT_TOKEN}"
-                //   },
-                //   "slack": {
-                //     "botToken": "${SLACK_BOT_TOKEN}",
-                //     "appToken": "${SLACK_APP_TOKEN}"
-                //   }
-                // }
+                "channels": {
+                  "telegram": {
+                    "botToken": "${TELEGRAM_BOT_TOKEN}",
+                    "enabled": true,
+                    "dmPolicy": "pairing",
+                  },
+                }
               }
       persistence:
         data:
