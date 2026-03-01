@@ -72,13 +72,13 @@ spec:
                 "models": {
                   "providers": {
                     "ollama": {
-                      "baseUrl": "http://ollama.ollama.svc.cluster.local:11434",
+                      "baseUrl": "http://192.168.1.144:11434",
                       "apiKey": "ollama-local",
                       "api": "ollama",
                       "models": [
                         {
-                          "id": "qwen2.5:0.5b",
-                          "name": "qwen2.5:0.5b",
+                          "id": "voytas26/openclaw-qwen3vl-8b-opt:latest",
+                          "name": "voytas26/openclaw-qwen3vl-8b-opt:latest",
                           "reasoning": false,
                           "input": ["text"],
                           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
@@ -108,9 +108,9 @@ spec:
                     "workspace": "/home/node/.openclaw/workspace",
                     "model": {
                       // Uses ANTHROPIC_API_KEY from environment
-                      "primary": "modal/zai-org/GLM-5-FP8",
+                      //"primary": "modal/zai-org/GLM-5-FP8",
                       //"fallbacks": ["ollama/qwen2.5:0.5b"]
-                      //"primary": "ollama/qwen2.5:0.5b"
+                      "primary": "ollama/voytas26/openclaw-qwen3vl-8b-opt:latest"
                     },
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
