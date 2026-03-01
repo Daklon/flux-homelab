@@ -86,10 +86,26 @@ spec:
                         },
                       ]
                     },
+                    "nvidia-kimi": {
+                      "baseUrl": "http://integrate.api.nvidia.com/v1/",
+                      "apiKey": "${NVIDIA_API_KEY}",
+                      "api": "openai-completions",
+                      "models": [
+                        {
+                          "id": "moonshotai/kimi-k2.5",
+                          "name": "NVIDIA Kimi K2.5",
+                          "reasoning": false,
+                          "input": ["text"],
+                          "contextWindow": 256000,
+                          "maxTokens": 8192,
+                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+                        },
+                      ]
+                    },
                     "modal": {
                       //should use MODAL_API_KEY from environment
                       "baseUrl": "https://api.us-west-2.modal.direct/v1/",
-                      "apiKey": "${MODEL_API_KEY}",
+                      "apiKey": "${MODAL_API_KEY}",
                       "api": "openai-completions",
                       "models": [
                         {
@@ -108,10 +124,9 @@ spec:
                   "defaults": {
                     "workspace": "/home/node/.openclaw/workspace",
                     "model": {
-                      // Uses ANTHROPIC_API_KEY from environment
-                      //"primary": "modal/zai-org/GLM-5-FP8",
-                      //"fallbacks": ["ollama/qwen2.5:0.5b"]
-                      "primary": "ollama/opmo"
+                      
+                      "primary": "nvidia-kimi/moonshotai/kimi-k2.5",
+                      "fallbacks": ["ollama/opmo", "modal/zai-org/GLM-5-FP8"]
                     },
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
