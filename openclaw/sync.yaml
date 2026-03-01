@@ -157,7 +157,7 @@ spec:
                       "enabled": true
                     }
                   }
-                }
+                },
 
                 // Channel configuration can be added here:
                 "channels": {
