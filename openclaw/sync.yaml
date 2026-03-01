@@ -131,7 +131,7 @@ spec:
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
                     "maxConcurrent": 1,
-                    "typingTtlSeconds": 0
+                    //"typingTtlSeconds": 0
                   },
                   "list": [
                     {
