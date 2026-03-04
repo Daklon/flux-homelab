@@ -30,6 +30,12 @@ spec:
       retries: 1
   interval: 10m0s
   values:
+    ollama:
+      enabled: false
+    ollamaUrls: ["http://192.168.1.144:11434"]
+
+    enableOpenaiApi: false
+    
     replicaCount: 1
 
     image:
@@ -49,11 +55,6 @@ spec:
       enabled: true
       storageClass: "openebs-hostpath"
       size: 5Gi
-
-    # Conexión a servidor Ollama externo
-    env:
-      - name: OLLAMA_API_BASE_URL
-        value: "http://192.168.1.144:11434"
 
     ingress:
       enabled: true
