@@ -58,14 +58,9 @@ spec:
 
     ingress:
       enabled: true
-      className: traefik
+      class: traefik
       annotations:
         cert-manager.io/cluster-issuer: "ovh"
       host: openwebui.plasm.es
       tls: true
       existingSecret: openwebui-plasm-es-tls
-
-    service:
-      type: ClusterIP
-      port: 80
-      targetPort: 8080
