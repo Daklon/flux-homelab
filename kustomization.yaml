@@ -9,9 +9,9 @@ resources:
   - metallb/
   - traefik/
   - cluster-updater/
-  - external-dns/
+  #- external-dns/
   - frigate/
-  - kube-prometheus-stack/
-  - openwebui/
+  #- kube-prometheus-stack/
+  - openweb-ui/
   - openclaw/
   # - authentik/
