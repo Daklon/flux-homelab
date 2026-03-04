@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Habilita/deshabilita aplicaciones comentando líneas
+resources:
+  - flux-system/
+  - openebs/
+  - cert-manager/
+  - metallb/
+  - traefik/
+  - cluster-updater/
+  - external-dns/
+  - frigate/
+  - kube-prometheus-stack/
+  - openwebui/
+  - openclaw/
+  # - authentik/
