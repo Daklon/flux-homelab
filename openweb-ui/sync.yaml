@@ -61,6 +61,6 @@ spec:
       class: traefik
       annotations:
         cert-manager.io/cluster-issuer: "ovh"
-      host: openwebui.plasm.es
+      host: chat.plasm.es
       tls: true
       existingSecret: openwebui-plasm-es-tls
