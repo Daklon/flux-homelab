@@ -32,7 +32,7 @@ spec:
   values:
     replicaCount: 1
     image:
-      tag: 0.16.3
+      tag: 0.17.0
     ingress:
       enabled: true
       hosts: 
