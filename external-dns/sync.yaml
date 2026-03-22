@@ -67,7 +67,3 @@ spec:
         sources: ["ingress", "service", "crd" ]
         registry: noop
         domainFilters: ["plasm.es"]
-
-
-        registry: noop
-        policy: sync
