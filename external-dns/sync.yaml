@@ -6,24 +6,6 @@ metadata:
 spec:
     interval: 10m0s
     url: https://kubernetes-sigs.github.io/external-dns/
-sops:
-    lastmodified: "2025-04-13T17:57:11Z"
-    mac: ENC[AES256_GCM,data:uZjd41MRGXL5yfS1IsZ2laMH81fMb4Fr7/zCOBQE4QsnIIonJktQ6Xs1UiPL59L6XS9pBT1i9KmB5mrVAd/pGYBkK94Skec9thz7ii7MqLWWJJLju+GVoCBiS4smDXbV/pjfPcBvg9kiL/SPoz9TE8jCw6PvXvwqle9fh5IcnBw=,iv:Peyn0ipPBRIIqdfovBtGG3g4oQrcNZu3tZoTLEGEw3Q=,tag:sZ7EoKL8/Vyz0IewmL/iyA==,type:str]
-    pgp:
-        - created_at: "2025-04-13T17:49:24Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
-
-            hF4DwW+vaVwrS2ISAQdApm/Kxu5GpV8aRChTsaSWax1FhLa93GqROblH5BqvJg0w
-            5D0cwcGSQ8Fn9AEQkV0WL5d8ohw4X1iOp64Wt0p7cLKWqC6rfQnoc7MlG/O5t7Kb
-            1GgBCQIQmSzVRsRAdnap4huWr7LaF7S8abLa3OJi1R5DpHEV806PJcvRc+QwCymf
-            2fwrLY6SPuSdvf2AWeQMMPRaQ8oBHCODo2HxIAm0lRaTFixcaI5HJCS8ffgzxO5K
-            eWh6DRJZvuA5Cw==
-            =ermp
-            -----END PGP MESSAGE-----
-          fp: B51175A0392C55BA3A9D508C914AB2CE60624E82
-    encrypted_regex: extraArgs
-    version: 3.10.1
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -47,28 +29,45 @@ spec:
     interval: 10m0s
     values:
         provider:
-            name: pihole
+            name: opnsense-webhook
+            opnsense:
+              image:
+                repository: ghcr.io/crutonjohn/external-snd-opnsense-webhook
+                tag: 1.0.0
+            env:
+              - name: OPNSENSE_API_SECRET
+                valueFrom:
+                  secretKeyRef:
+                    name: external-dns-opnsense-secret
+                    key: api_secret
+              - name: OPNSENSE_API_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: external-dns-opnsense-secret
+                    key: api_key
+              - name: OPNSENSE_API_HOST
+                value: "https://192.168.1.1"
+              - name: OPNSENSE_SKIP_TLS_VERIFY
+                value: "true"
+              - name: LOG_LEVEL
+                value: "debug"
+            livenessProbe:
+              httpGet:
+                path: /healthz
+                port: http-wh-metrics
+              initialDelaySeconds: 10
+              timeoutSeconds: 5
+            readinessProbe:
+              httpGet:
+                path: /readyz
+                port: http-wh-metrics
+              initialDelaySeconds: 10
+              timeoutSeconds: 5
+        policy: sync
+        sources: ["ingress", "service", "crd" ]
+        registry: noop
+        domainFilters: ["plasm.es"]
+
+
         registry: noop
         policy: sync
-        extraArgs:
-            - ENC[AES256_GCM,data:RwEH4awC1tpLmwHRA5s7rQFdJ6obYA==,iv:ONlPMSvqwRxe4vTBiYBc6IlVvjOo2smPhE+WkwmLuRs=,tag:M0xQXVRf41W9ZFLx894Qtw==,type:str]
-            - ENC[AES256_GCM,data:cWj5es4ncVraPFFRJJdan4KaiY27C9baR0Qp8OShoMoaaBQ=,iv:2Q415AQksV+vosKjSrO+aX/JsaiYlkjwccY8KVdcVjQ=,tag:r9rvwZna7Fdy544H1A38mA==,type:str]
-            - ENC[AES256_GCM,data:VvYg7cEPgH4zUOiENhX2yVJyhwBBf34PzrinFQ==,iv:osfNqZ5uh8C5r2d9hhSE5pW8v/YmF/kI1Ina8VG+28Y=,tag:JkmWEv1W1irTG8AGg8pEAg==,type:str]
-sops:
-    lastmodified: "2025-04-13T17:57:11Z"
-    mac: ENC[AES256_GCM,data:uZjd41MRGXL5yfS1IsZ2laMH81fMb4Fr7/zCOBQE4QsnIIonJktQ6Xs1UiPL59L6XS9pBT1i9KmB5mrVAd/pGYBkK94Skec9thz7ii7MqLWWJJLju+GVoCBiS4smDXbV/pjfPcBvg9kiL/SPoz9TE8jCw6PvXvwqle9fh5IcnBw=,iv:Peyn0ipPBRIIqdfovBtGG3g4oQrcNZu3tZoTLEGEw3Q=,tag:sZ7EoKL8/Vyz0IewmL/iyA==,type:str]
-    pgp:
-        - created_at: "2025-04-13T17:49:24Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
-
-            hF4DwW+vaVwrS2ISAQdApm/Kxu5GpV8aRChTsaSWax1FhLa93GqROblH5BqvJg0w
-            5D0cwcGSQ8Fn9AEQkV0WL5d8ohw4X1iOp64Wt0p7cLKWqC6rfQnoc7MlG/O5t7Kb
-            1GgBCQIQmSzVRsRAdnap4huWr7LaF7S8abLa3OJi1R5DpHEV806PJcvRc+QwCymf
-            2fwrLY6SPuSdvf2AWeQMMPRaQ8oBHCODo2HxIAm0lRaTFixcaI5HJCS8ffgzxO5K
-            eWh6DRJZvuA5Cw==
-            =ermp
-            -----END PGP MESSAGE-----
-          fp: B51175A0392C55BA3A9D508C914AB2CE60624E82
-    encrypted_regex: extraArgs
-    version: 3.10.1
