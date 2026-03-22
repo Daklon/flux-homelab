@@ -30,7 +30,7 @@ spec:
     values:
         provider:
             name: opnsense-webhook
-            opnsense:
+            webhook:
               image:
                 repository: ghcr.io/crutonjohn/external-snd-opnsense-webhook
                 tag: 1.0.0
