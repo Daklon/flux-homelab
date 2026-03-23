@@ -77,7 +77,7 @@ spec:
         size: 2Gi
         accessModes:
           - ReadWriteOnce
-        storageClassName: "openebs-hostpath" # Specify storage class if needed
+        storageClass: "openebs-hostpath" # Specify storage class if needed
 
     # Resource management
     resources: {}
