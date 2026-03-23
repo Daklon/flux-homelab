@@ -48,8 +48,8 @@ spec:
     config:
       # Port configuration for the controller
       ports:
-        manageHttp: 8088
-        manageHttps: 8043
+        manageHttp: 80
+        manageHttps: 443
         portalHttp: 8088
         portalHttps: 8843
         appDiscovery: 27001
@@ -92,9 +92,15 @@ spec:
     ingress:
       enabled: true
       className: "traefik"
-      annotations: {}
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure,omada-portal
       managementHosts:
         - host: omada.plasm.es
+          paths:
+            - path: /
+              pathType: Prefix
+      portalHosts:
+        - host: portal-cautivo.plasm.es
           paths:
             - path: /
               pathType: Prefix
@@ -102,3 +108,4 @@ spec:
         - secretName: omada-tls-secret
           hosts:
             - omada.plasm.es
+            - portal-cautivo.plasm.es

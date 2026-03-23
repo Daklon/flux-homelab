@@ -1,0 +1,146 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteUDP
+metadata:
+  name: omada-27001
+  namespace: omada
+spec:
+  entryPoints:
+    - omada27001
+  routes:
+    - services:
+        - name: omada-controller
+          port: 27001
+          nativeLB: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteUDP
+metadata:
+  name: omada-29810
+  namespace: omada
+spec:
+  entryPoints:
+    - omada29810
+  routes:
+    - services:
+        - name: omada-controller
+          port: 29810
+          nativeLB: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteUDP
+metadata:
+  name: omada-19810
+  namespace: omada
+spec:
+  entryPoints:
+    - omada19810
+  routes:
+    - services:
+        - name: omada-controller
+          port: 19810
+          nativeLB: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: omada-29811
+  namespace: omada
+spec:
+  entryPoints:
+    - omada29811
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: omada-controller
+          port: 29811
+          nativeLB: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: omada-29812
+  namespace: omada
+spec:
+  entryPoints:
+    - omada29812
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: omada-controller
+          port: 29812
+          nativeLB: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: omada-29813
+  namespace: omada
+spec:
+  entryPoints:
+    - omada29813
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: omada-controller
+          port: 29813
+          nativeLB: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: omada-29814
+  namespace: omada
+spec:
+  entryPoints:
+    - omada29814
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: omada-controller
+          port: 29814
+          nativeLB: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: omada-29815
+  namespace: omada
+spec:
+  entryPoints:
+    - omada29815
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: omada-controller
+          port: 29815
+          nativeLB: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: omada-29816
+  namespace: omada
+spec:
+  entryPoints:
+    - omada29816
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: omada-controller
+          port: 29816
+          nativeLB: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: omada-29817
+  namespace: omada
+spec:
+  entryPoints:
+    - omada29817
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: omada-controller
+          port: 29817
+          nativeLB: true

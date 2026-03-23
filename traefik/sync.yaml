@@ -32,3 +32,10 @@ spec:
     ingressRoute:
       dashboard:
         enabled: true
+    ports:
+      omada-portal:
+        port: 8843
+        exposedPort: 8843
+        protocol: TCP
+        expose:
+          default: true
