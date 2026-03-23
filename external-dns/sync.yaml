@@ -45,7 +45,7 @@ spec:
               secretKeyRef:
                 name: external-dns-opnsense-secret
                 key: api_key
-          - name: OPNSENSE_HOSTED_ZONE_ID
+          - name: OPNSENSE_HOST
             value: "https://192.168.1.1"
           - name: OPNSENSE_API_HOST
             value: "https://192.168.1.1"
