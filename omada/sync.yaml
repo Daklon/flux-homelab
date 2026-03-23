@@ -48,8 +48,8 @@ spec:
     config:
       # Port configuration for the controller
       ports:
-        manageHttp: 80
-        manageHttps: 443
+        manageHttp: 8088
+        manageHttps: 8043
         portalHttp: 8088
         portalHttps: 8843
         appDiscovery: 27001
@@ -93,7 +93,7 @@ spec:
       enabled: true
       className: "traefik"
       annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure,omada-portal
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure,omada-portal,omada-manage
       managementHosts:
         - host: omada.plasm.es
           paths:
