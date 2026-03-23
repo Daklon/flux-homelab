@@ -1,0 +1,104 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: omada-controller
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: oci://registry-1.docker.io/mbentley/omada-controller-helm
+  ref:
+    semver: "1.1.x"
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: omada-controller
+  namespace: flux-system
+spec:
+  releaseName: omada-controller
+  chartRef:
+    kind: OCIRepository
+    name: omada-controller
+  targetNamespace: omada
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  interval: 10m0s
+  values:
+    # Image configuration
+    image:
+      repository: mbentley/omada-controller
+      pullPolicy: IfNotPresent
+      tag: ""  # defaults to chart appVersion if empty
+
+    # Service configuration
+    service:
+      type: ClusterIP
+      annotations: {}
+      labels: {}
+
+    # Omada Controller configuration
+    config:
+      # Port configuration for the controller
+      ports:
+        manageHttp: 8088
+        manageHttps: 8043
+        portalHttp: 8088
+        portalHttps: 8843
+        appDiscovery: 27001
+        discovery: 29810
+        udpManagement: 19810
+      
+      # Timezone configuration
+      timezone: Atlantic/Canary
+      
+      # TLS configuration (set to true if using cert-manager or custom certificates)
+      rootless: true
+      showMongoDBLogs: false
+      showServerLogs: true
+
+    # Persistence configuration
+    persistence:
+      data:
+        enabled: true
+        size: 5Gi
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: "openebs-hostpath" # Specify storage class if needed
+      logs:
+        enabled: true
+        size: 2Gi
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: "openebs-hostpath" # Specify storage class if needed
+
+    # Resource management
+    resources: {}
+    #  limits:
+    #    cpu: 2000m
+    #    memory: 2Gi
+    #  requests:
+    #    cpu: 500m
+    #    memory: 1Gi
+
+    # Ingress configuration (optional, disable if using LoadBalancer only)
+    ingress:
+      enabled: true
+      className: "traefik"
+      annotations: {}
+      managementHosts:
+        - host: omada.plasm.es
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: omada-tls-secret
+          hosts:
+            - omada.plasm.es
