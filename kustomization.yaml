@@ -16,3 +16,4 @@ resources:
   - openclaw/
   - omada
   # - authentik/
+  - home-tasks
