@@ -47,7 +47,7 @@ spec:
     
     ingress:
       enabled: true
-      className: nginx
+      className: traefik
       annotations:
         cert-manager.io/cluster-issuer: ovh
       hosts:
