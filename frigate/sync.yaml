@@ -61,6 +61,10 @@ spec:
         enabled: false
       proxy:
         default_role: admin
+      objects:
+        track:
+        - person
+        - cat
       model:
         width: 300
         height: 300
@@ -68,6 +72,7 @@ spec:
         input_pixel_format: bgr
         path: /openvino-model/ssdlite_mobilenet_v2.xml
         labelmap_path: /openvino-model/coco_91cl_bkgr.txt
+
       go2rtc:
         streams:
           smar1:
