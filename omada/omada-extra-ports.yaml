@@ -13,6 +13,36 @@ spec:
           nativeLB: true
 ---
 apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: omada-controller-insecure
+  namespace: omada
+spec:
+  insecureSkipVerify: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: omada-http-8088
+  namespace: omada
+spec:
+  entryPoints:
+    - omada-http
+  routes:
+    - match: Host(`omada.plasm.es`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: omada-controller
+          port: 8088
+          nativeLB: true
+    - match: Host(`portal-cautivo.plasm.es`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: omada-controller
+          port: 8088
+          nativeLB: true
+---
+apiVersion: traefik.io/v1alpha1
 kind: IngressRouteUDP
 metadata:
   name: omada-29810

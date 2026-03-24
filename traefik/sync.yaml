@@ -33,6 +33,12 @@ spec:
       dashboard:
         enabled: true
     ports:
+      omada-http:
+        port: 8088
+        exposedPort: 8088
+        protocol: TCP
+        expose:
+          default: true
       omada-manage:
         port: 8043
         exposedPort: 8043
