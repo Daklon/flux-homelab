@@ -96,6 +96,7 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure,omada-portal,omada-manage
         traefik.ingress.kubernetes.io/service.serversscheme: https
         traefik.ingress.kubernetes.io/service.serverstransport: omada-omada-controller-insecure@kubernetescrd
+        cert-manager.io/cluster-issuer: ovh
       managementHosts:
         - host: omada.plasm.es
           paths:
