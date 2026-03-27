@@ -179,7 +179,7 @@ spec:
       name: omada-controller
       sectionName: manage-https
   validation:
-    hostname: localhost
+    hostname: omada
     caCertificateRefs:
       - group: ""
         kind: ConfigMap
@@ -197,7 +197,7 @@ spec:
       name: omada-controller
       sectionName: portal-https
   validation:
-    hostname: localhost
+    hostname: omada
     caCertificateRefs:
       - group: ""
         kind: ConfigMap
