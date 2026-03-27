@@ -129,6 +129,44 @@ spec:
         - name: omada-controller
           port: 8843
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: omada-ca-cert
+  namespace: omada
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIFIzCCAwugAwIBAgIQGSs/3VKEHKmarZ+h7rFzjDANBgkqhkiG9w0BAQsFADA4
+    MRIwEAYDVQQDDAlsb2NhbGhvc3QxEDAOBgNVBAoMB1RQLUxpbmsxEDAOBgNVBAsM
+    B1RQLUxpbmswHhcNMjYwMzIzMDE1NjQ3WhcNMjgwNjI1MDA1NjQ3WjA4MRIwEAYD
+    VQQDDAlsb2NhbGhvc3QxEDAOBgNVBAoMB1RQLUxpbmsxEDAOBgNVBAsMB1RQLUxp
+    bmswggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDLEXNL5qMex7/Qi7Fj
+    cV1tIB3P5j/EKpj0CwT0dZtVKAM9YoYEW8eVhJEuI10G2LgdSEeX7FYJxKX7TxrD
+    lEFRgxQI+tt6IGn0lRL+ctA8ZAWjN2vEW1Ky+gMgwRLlsWlPiWcNmug/6lk+1suy
+    amNx3OYKDCjvhzpBCsHg1HMJoKjr9QOo9gQ2sw3yTXCGeXu7ObnSLAZrthpYDdVk
+    GS5S11S4MDteo87zCI1jQTYevuHmDLphb6b5TLbaVI6u+Ev5VNAU6hsyXb3vLTeT
+    CoOGOyCuz4RKmqRUyYcX+2EVa8VbpeSqxwRI7AjJKxxfr/ZnZSB35GTeWKipHD/B
+    0eUxtFdkd3cjpwvVu33mUzHf4f0/HF/Dx3l3j2amorXcSOtEP3IylsW7ZsFfHqrd
+    EXimQ34ochEKJpjktX6nLXCpTSu9tYte5mVfqxUknbMb84vMh0bx2UdPNDyIV3Fl
+    D3nh58SbQJ+f2DICRNNEiGga9ico3RV3UXt1Z4CPbNHc5YLmjQF/EKfqu1vA7QnJ
+    2w0zLCisxaZYd4g+lnnRwh3SoYS9iWpauqFCe8+hnC2Op8XhoaDeADHjlU6T6Y9f
+    cl7UQxnPHlLS0bf+uGk5WeW7sQgGHHQfG8HmajBIqrTHGQBWXmT6JkSz8IUtVgwn
+    3XCzU12H5w/ylucNn/Mc9Zka7wIDAQABoykwJzATBgNVHSUEDDAKBggrBgEFBQcD
+    ATAQBgNVHREECTAHggVPbWFkYTANBgkqhkiG9w0BAQsFAAOCAgEAOkrkA+q68U2o
+    qtY30AQSV0gykZWYrJLeaK2Q4xFD9vWWEKGKVAZQ/JjL1KhWUE80pHUusk9FQi7Y
+    rEVdu62vrFC2V6e8CQQfUOByPMpgWIUS/x73n/U8XQnXaqegY88vMWOPstj/ZhfQ
+    mIn8Nwiznksx2gNggMYkgSd25BMNGfOALUSMrcKJz0a/gmm27U6nwqLV13sPc8KS
+    kJdI3nD5s9oOlVUGxqMFidBLYX9jYiz/9HLcw3TiVmaNFf/+TaRcKa6gCxrb/hua
+    ZLzyYbdT0fu7ue0f2yLiV1vw/geDsXnqTR8XA4Rrbpwd3pbGY1VN4SHQ6lPa27ZI
+    uqBm6N5bh47aGfFTMPKSBhAen+8htcgYRgF2TokxsvM+xUW3Q0WYB0RBO8XmCtNH
+    uTFjWJGkTQqszkpjcYMOi+VogMK5i3jVfcI+EBbNjsTUBIoa6uFQxWn629IfZRe2
+    8D216T6attkTgqOnvU4CF3TskvHwheh7Z0T1V0F80TVeRc4XRcIUALIlJDgt60UL
+    CRrPhUqhqHzIYcc1Q5xUMeqBi0F6nsdZzbwvdMwtkPl3x0q8II3Z/mZixrAWB2hm
+    ltipYV+lPI4YXgR9tSg0H42I/UG7KLgW2QgPc1IAvJI1oNzhZnOurmWFoKgmjlS2
+    uLIprBW19w8dTXU8GP5NzExX5+b2QFU=
+    -----END CERTIFICATE-----
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: BackendTLSPolicy
 metadata:
@@ -144,7 +182,7 @@ spec:
     hostname: localhost
     caCertificateRefs:
       - group: ""
-        kind: Secret
+        kind: ConfigMap
         name: omada-ca-cert
 ---
 apiVersion: gateway.networking.k8s.io/v1
@@ -162,7 +200,7 @@ spec:
     hostname: localhost
     caCertificateRefs:
       - group: ""
-        kind: Secret
+        kind: ConfigMap
         name: omada-ca-cert
 ---
 apiVersion: traefik.io/v1alpha1
