@@ -139,7 +139,7 @@ spec:
     - group: ""
       kind: Service
       name: omada-controller
-      port: 8043
+      sectionName: manage-https
   validation:
     hostname: Omada
     caCertificateRefs:
@@ -156,7 +156,7 @@ spec:
     - group: ""
       kind: Service
       name: omada-controller
-      port: 8843
+      sectionName: portal-https
   validation:
     hostname: Omada
     caCertificateRefs:
