@@ -88,27 +88,6 @@ spec:
     #    cpu: 500m
     #    memory: 1Gi
 
-    # Ingress configuration (optional, disable if using LoadBalancer only)
+    # Ingress configuration (disabled - using IngressRoute TCP instead for custom ports)
     ingress:
-      enabled: true
-      className: "traefik"
-      annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure,omada-portal,omada-manage,omada-http
-        traefik.ingress.kubernetes.io/service.serversscheme: https
-        traefik.ingress.kubernetes.io/service.serverstransport: omada-omada-controller-insecure@kubernetescrd
-        cert-manager.io/cluster-issuer: ovh
-      managementHosts:
-        - host: omada.plasm.es
-          paths:
-            - path: /
-              pathType: Prefix
-      portalHosts:
-        - host: portal-cautivo.plasm.es
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - secretName: omada-tls-secret
-          hosts:
-            - omada.plasm.es
-            - portal-cautivo.plasm.es
+      enabled: false
