@@ -78,6 +78,14 @@ spec:
         accessModes:
           - ReadWriteOnce
         storageClass: "openebs-hostpath" # Specify storage class if needed
+      extraVolumes:
+        - name: omada-tls
+          secret:
+            secretName: omada-tls-secret
+      extraVolumeMounts:
+        - name: omada-tls
+          mountPath: /opt/tplink/EAPController/cert
+          readOnly: true
 
     # Resource management
     resources: {}
