@@ -66,6 +66,6 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 5
     policy: sync
-    sources: ["ingress", "service", "crd" ]
+    sources: ["ingress", "service", "crd", "gateway-httproute" ]
     registry: noop
     domainFilters: ["plasm.es"]
