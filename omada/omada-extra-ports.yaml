@@ -12,25 +12,13 @@ spec:
           port: 27001
           nativeLB: true
 ---
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: omada-tls
-  namespace: omada
-spec:
-  secretName: omada-tls-secret
-  issuerRef:
-    name: ovh
-    kind: ClusterIssuer
-  dnsNames:
-    - omada.plasm.es
-    - portal-cautivo.plasm.es
----
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: omada-gateway
   namespace: omada
+  annotations:
+    cert-manager.io/cluster-issuer: ovh
 spec:
   gatewayClassName: traefik
   listeners:
@@ -117,6 +105,14 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
+              - name: X-Forwarded-Port
+                value: "8043"
       backendRefs:
         - name: omada-controller
           port: 8088
@@ -137,6 +133,14 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
+              - name: X-Forwarded-Port
+                value: "8843"
       backendRefs:
         - name: omada-controller
           port: 8088
