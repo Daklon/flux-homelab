@@ -51,14 +51,14 @@ spec:
       annotations:
         cert-manager.io/cluster-issuer: ovh
       hosts:
-        - host: home-task.plasm.es
+        - host: limpia.plasm.es
           paths:
             - path: /
               pathType: Prefix
       tls:
-        - secretName: home-task-tls
+        - secretName: limpia-tls
           hosts:
-            - home-task.plasm.es
+            - limpia.plasm.es
     
     persistence:
       enabled: true
