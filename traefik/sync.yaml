@@ -51,3 +51,63 @@ spec:
         protocol: TCP
         expose:
           default: true
+      omada27001:
+        port: 27001
+        exposedPort: 27001
+        protocol: UDP
+        expose:
+          default: true
+      omada29810:
+        port: 29810
+        exposedPort: 29810
+        protocol: UDP
+        expose:
+          default: true
+      omada19810:
+        port: 19810
+        exposedPort: 19810
+        protocol: UDP
+        expose:
+          default: true
+      omada29811:
+        port: 29811
+        exposedPort: 29811
+        protocol: TCP
+        expose:
+          default: true
+      omada29812:
+        port: 29812
+        exposedPort: 29812
+        protocol: TCP
+        expose:
+          default: true
+      omada29813:
+        port: 29813
+        exposedPort: 29813
+        protocol: TCP
+        expose:
+          default: true
+      omada29814:
+        port: 29814
+        exposedPort: 29814
+        protocol: TCP
+        expose:
+          default: true
+      omada29815:
+        port: 29815
+        exposedPort: 29815
+        protocol: TCP
+        expose:
+          default: true
+      omada29816:
+        port: 29816
+        exposedPort: 29816
+        protocol: TCP
+        expose:
+          default: true
+      omada29817:
+        port: 29817
+        exposedPort: 29817
+        protocol: TCP
+        expose:
+          default: true
