@@ -39,7 +39,9 @@ spec:
             key: token
       runnerToken: ''
     url: https://gitlab.com
-    tags: linux,shared
+    tags:
+      - linux
+      - shared
     runUntainted: true
     executor: kubernetes
     privileged: true
