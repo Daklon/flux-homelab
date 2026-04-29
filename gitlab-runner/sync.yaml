@@ -18,7 +18,7 @@ spec:
   chart:
     spec:
       chart: gitlab-runner
-      version: '1.10.2'
+      version: "1.10.2"
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
