@@ -17,3 +17,4 @@ resources:
   - omada
   # - authentik/
   - home-tasks
+  - gitlab-runner/

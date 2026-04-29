@@ -1,0 +1,115 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: gitlab-runner
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://charts.gitlab.io
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gitlab-runner
+  namespace: flux-system
+spec:
+  releaseName: gitlab-runner
+  chart:
+    spec:
+      chart: gitlab-runner
+      version: '1.10.2'
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: gitlab-runner
+  targetNamespace: gitlab-runner
+  install:
+    createNamespace: true
+    remediation:
+      retries: 1
+  interval: 10m0s
+  values:
+    concurrency: 2
+    extraSecretValues:
+      runnerRegistrationToken:
+        valueFrom:
+          secretKeyRef:
+            name: gitlab-runner-registration-token
+            key: token
+      runnerToken: ''
+    url: https://gitlab.com
+    tags: linux,shared
+    runUntainted: true
+    executor: kubernetes
+    privileged: true
+    kubernetes:
+      image: ubuntu:22.04
+      namespace: gitlab-runner
+      imagePullPolicy: IfNotPresent
+      pod_annotations: ""
+      metadata:
+        labels:
+          app.kubernetes.io/managed-by: flux
+        annotations: {}
+      serviceAccount: ""
+      serviceAccountAnnotations: {}
+      schedulerName: ""
+      sidecarImages:
+        docker:
+          image: docker:24-dind
+          tag: latest
+          entrypoint: ["dockerd", "--host", "tcp://localhost:2375"]
+          volumeMounts:
+            - name: docker-config
+              mountPath: /etc/docker
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
+      pod_extra_specs: {}
+      imagePullSecrets: []
+      nodeSelector: {}
+      tolerations: []
+      affinity: {}
+    rbac:
+      created: true
+      secretsCreation: true
+      rules:
+        - apiGroups: [""]
+          resources: ["secrets"]
+          verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+        - apiGroups: [""]
+          resources: ["pods", "pods/exec", "pods/log", "pods/portforward"]
+          verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+        - apiGroups: [""]
+          resources: ["pod/templates"]
+          verbs: ["get", "list", "watch", "create", "update", "patch"]
+        - apiGroups: ["apps"]
+          resources: ["deployments", "statefulsets", "daemonsets"]
+          verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+        - apiGroups: ["batch"]
+          resources: ["jobs", "cronjobs"]
+          verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+        - apiGroups: [""]
+          resources: ["configmaps"]
+          verbs: ["get", "list", "watch"]
+    monitor:
+      prometheus:
+        servicemonitor:
+          enabled: false
+    dashboard:
+      enabled: false
+    logLevel: info
+    metrics:
+      enabled: true
+    config:
+      [[runners]]
+        [runners.kubernetes]
+          image = "ubuntu:22.04"
+          namespace = "gitlab-runner"
+          memory = "512m"
+          cpu = "500m"
