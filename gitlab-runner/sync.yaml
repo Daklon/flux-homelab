@@ -109,9 +109,11 @@ spec:
     metrics:
       enabled: true
     config:
-      [[runners]]
-        [runners.kubernetes]
-          image = "ubuntu:22.04"
-          namespace = "gitlab-runner"
-          memory = "512m"
-          cpu = "500m"
+      |
+        [[runners]]
+          url = "https://gitlab.com"
+          [runners.kubernetes]
+            image = "ubuntu:22.04"
+            namespace = "gitlab-runner"
+            memory = "512m"
+            cpu = "500m"
