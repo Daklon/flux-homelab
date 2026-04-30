@@ -102,8 +102,8 @@ spec:
     logLevel: info
     metrics:
       enabled: true
-    configTemplate:
-      |
+    runners:
+      configTemplate: |
         [[runners]]
           url = "https://gitlab.com"
           [runners.kubernetes]
