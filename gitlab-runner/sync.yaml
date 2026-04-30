@@ -30,7 +30,7 @@ spec:
       retries: 1
   interval: 10m0s
   valuesFrom:
-    - kind: Secret
+    - kind: ConfigMap
       name: gitlab-runner-creds
       valuesKey: values.yaml
   values:
