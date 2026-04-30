@@ -113,3 +113,8 @@ spec:
             namespace = "gitlab-runner"
             memory = "512m"
             cpu = "500m"
+          [runners.docker]
+            host = "tcp://localhost:2375"
+            tls_verify = false
+            image = "docker:24-dind"
+            privileged = true
