@@ -78,7 +78,7 @@ spec:
           resources: ["secrets"]
           verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
         - apiGroups: [""]
-          resources: ["pods", "pods/exec", "pods/log", "pods/portforward"]
+          resources: ["pods", "pods/exec", "pods/log", "pods/portforward", "pods/attach"]
           verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
         - apiGroups: [""]
           resources: ["pod/templates"]
@@ -90,8 +90,8 @@ spec:
           resources: ["jobs", "cronjobs"]
           verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
         - apiGroups: [""]
-          resources: ["configmaps"]
-          verbs: ["get", "list", "watch"]
+          resources: ["configmaps", "secrets"]
+          verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
     monitor:
       prometheus:
         servicemonitor:
