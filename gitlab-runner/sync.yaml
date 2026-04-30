@@ -32,8 +32,6 @@ spec:
   values:
     concurrency: 2
     url: https://gitlab.com
-    runnerRegistrationToken:
-      existingSecret: gitlab-runner-registration-token
     tags:
       - linux
       - shared
@@ -104,16 +102,8 @@ spec:
     metrics:
       enabled: true
     runners:
-      configTemplate: |
-        [[runners]]
-          url = "https://gitlab.com"
-          [runners.kubernetes]
-            namespace = "gitlab-runner"
-            image = "ubuntu:22.04"
-            memory = "512m"
-            cpu = "500m"
-    config:
-      |
+      secret: gitlab-runner-secret
+      config: |
         [[runners]]
           url = "https://gitlab.com"
           [runners.kubernetes]
