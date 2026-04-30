@@ -29,10 +29,13 @@ spec:
     remediation:
       retries: 1
   interval: 10m0s
+  valuesFrom:
+    - kind: Secret
+      name: gitlab-runner-creds
+      valuesKey: values.yaml
   values:
     concurrency: 2
     url: https://gitlab.com
-    runnerRegistrationToken: glrt-pxuIUYrvk4jn7vKZV78T_WM6MQpnOjI1enF6YwpvOjEKdDoyCnU6bWZmOXcc.01.1o0sltgd3
     tags:
       - linux
       - shared
