@@ -32,7 +32,8 @@ spec:
   values:
     concurrency: 2
     url: https://gitlab.com
-    runnerRegistrationToken: glrt-pxuIUYrvk4jn7vKZV78T_WM6MQpnOjI1enF6YwpvOjEKdDoyCnU6bWZmOXcc.01.1o0sltgd3
+    runnerRegistrationToken:
+      existingSecret: gitlab-runner-registration-token
     tags:
       - linux
       - shared
