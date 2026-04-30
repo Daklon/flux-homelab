@@ -102,6 +102,15 @@ spec:
     logLevel: info
     metrics:
       enabled: true
+    configTemplate:
+      |
+        [[runners]]
+          url = "https://gitlab.com"
+          [runners.kubernetes]
+            namespace = "gitlab-runner"
+            image = "ubuntu:22.04"
+            memory = "512m"
+            cpu = "500m"
     config:
       |
         [[runners]]
