@@ -104,7 +104,7 @@ spec:
     runners:
       secret: gitlab-runner-secret
       concurrency: 2
-      config: |
+      configTemplate: |
         [[runners]]
           url = "https://gitlab.com"
           request_concurrency = 2
