@@ -29,13 +29,10 @@ spec:
     remediation:
       retries: 1
   interval: 10m0s
-  valuesFrom:
-    - kind: ConfigMap
-      name: gitlab-runner-creds
-      valuesKey: values.yaml
   values:
     concurrency: 2
     url: https://gitlab.com
+    runnerRegistrationToken: ""
     tags:
       - linux
       - shared
