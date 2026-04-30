@@ -32,9 +32,7 @@ spec:
   values:
     concurrency: 2
     url: https://gitlab.com
-    runnerRegistrationToken:
-      existingSecret: gitlab-runner-registration-token
-      secretKey: runner-registration-token
+    runnerRegistrationToken: glrt-pxuIUYrvk4jn7vKZV78T_WM6MQpnOjI1enF6YwpvOjEKdDoyCnU6bWZmOXcc.01.1o0sltgd3
     tags:
       - linux
       - shared
