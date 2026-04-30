@@ -29,15 +29,12 @@ spec:
     remediation:
       retries: 1
   interval: 10m0s
+  valuesFrom:
+    - kind: Secret
+      name: gitlab-runner-registration-token
+      valuesKey: token
   values:
     concurrency: 2
-    extraSecretValues:
-      runnerRegistrationToken:
-        valueFrom:
-          secretKeyRef:
-            name: gitlab-runner-registration-token
-            key: token
-      runnerToken: ''
     url: https://gitlab.com
     tags:
       - linux
