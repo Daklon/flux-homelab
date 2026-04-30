@@ -47,7 +47,7 @@ spec:
         labels:
           app.kubernetes.io/managed-by: flux
         annotations: {}
-      serviceAccount: ""
+      serviceAccount: gitlab-runner
       serviceAccountAnnotations: {}
       schedulerName: ""
       sidecarImages:
@@ -71,12 +71,12 @@ spec:
       tolerations: []
       affinity: {}
     rbac:
-      created: true
-      secretsCreation: true
+      create: true
+      serviceAccountName: gitlab-runner
       rules:
         - apiGroups: [""]
           resources: ["secrets"]
-          verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+          verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
         - apiGroups: [""]
           resources: ["pods", "pods/exec", "pods/log", "pods/portforward"]
           verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
