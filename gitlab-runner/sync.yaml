@@ -103,11 +103,11 @@ spec:
       enabled: true
     runners:
       secret: gitlab-runner-secret
-      concurrency: 2
+      concurrency: 10
       config: |
         [[runners]]
           url = "https://gitlab.com"
-          request_concurrency = 2
+          request_concurrency = 10
           [runners.kubernetes]
             image = "ubuntu:22.04"
             namespace = "gitlab-runner"
