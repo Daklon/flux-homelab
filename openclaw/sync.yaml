@@ -74,7 +74,7 @@ spec:
                   "providers": {
                     "llama.cpp": {
                       "baseUrl": "http://192.168.1.144:8001/v1",
-                      "apiKey": "",
+                      "apiKey": ${LLAMA_API_KEY},
                       "api": "openai-completions",
                       "request": { "allowPrivateNetwork": true },
                       "models": [
