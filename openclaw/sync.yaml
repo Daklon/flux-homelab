@@ -84,7 +84,12 @@ spec:
                           "reasoning": false,
                           "input": ["text"],
                           "cost": { "input": 0.435, "output": 0.87, "cacheRead": 0.0145, "cacheWrite": 0 },
-                          "compat": { "supportsTools": false }
+                          "compat": { "supportsTools": false },
+                          "params": {
+                            "extra_body": {
+                              "model": "unsloth/Qwen3.6-35B-A3B"
+                            }
+                          }
                         }
                       ]
                     },
