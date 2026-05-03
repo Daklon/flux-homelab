@@ -117,8 +117,8 @@ spec:
                     "workspace": "/home/node/.openclaw/workspace",
                     "model": {
                       
-                      "primary": "nvidia/z-ai/glm-4.7",
-                      "fallbacks": ["llama.cpp/unsloth/Qwen3.6-35B-A3B"]
+                      "primary": "llama.cpp/unsloth/Qwen3.6-35B-A3B",
+                      "fallbacks": ["nvidia/z-ai/glm-4.7"]
                     },
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
