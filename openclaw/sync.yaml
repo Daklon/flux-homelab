@@ -195,7 +195,6 @@ spec:
         main:
           containers:
             main:
-              tag: 2026.5.2
               envFrom:
                 - secretRef:
                     name: openclaw-env-secret
