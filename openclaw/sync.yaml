@@ -18,6 +18,7 @@ spec:
   chart:
     spec:
       chart: openclaw
+      version: '1.5.31'
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
@@ -71,36 +72,28 @@ spec:
                 },
                 "models": {
                   "providers": {
-                    "ollama": {
-                      "baseUrl": "http://192.168.1.144:11434/",
-                      "apiKey": "ollama-local",
-                      "api": "ollama",
+                    "llama.cpp": {
+                      "baseUrl": "http://192.168.1.144:8001/",
+                      "apiKey": "",
+                      "api": "openai-completions",
                       "models": [
                         {
-                          "id": "opmo:latest",
-                          "name": "opmo",
-                          "reasoning": false,
-                          "input": ["text"],
-                          "contextWindow": 50000,
-                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
-                        },
-                        {
-                          "id": "lfm2.5-thinking:1.2b",
-                          "name": "lfm2.5-thinking:1.2b",
+                          "id": "unsloth/qwen3.6-35b-a3b",
+                          "name": "qwen 3.6. 35b a3b",
                           "reasoning": false,
                           "input": ["text"],
                           "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
                         }
                       ]
                     },
-                    "nvidia-kimi": {
+                    "nvidia": {
                       "baseUrl": "https://integrate.api.nvidia.com/v1/",
                       "apiKey": "${NVIDIA_API_KEY}",
                       "api": "openai-completions",
                       "models": [
                         {
-                          "id": "moonshotai/kimi-k2.5",
-                          "name": "NVIDIA Kimi K2.5",
+                          "id": "z-ai/glm-4.7",
+                          "name": "NVIDIA glm 4.7",
                           "reasoning": false,
                           "input": ["text"],
                           "contextWindow": 256000,
@@ -109,21 +102,6 @@ spec:
                         },
                       ]
                     },
-                    "modal": {
-                      //should use MODAL_API_KEY from environment
-                      "baseUrl": "https://api.us-west-2.modal.direct/v1/",
-                      "apiKey": "${MODAL_API_KEY}",
-                      "api": "openai-completions",
-                      "models": [
-                        {
-                          "id": "zai-org/GLM-5-FP8",
-                          "name": "zai-org/GLM-5-FP8",
-                          "reasoning": true,
-                          "input": ["text"],
-                          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
-                        }
-                      ]
-                    }
                   }
                 },
                 // Agent configuration
@@ -132,8 +110,8 @@ spec:
                     "workspace": "/home/node/.openclaw/workspace",
                     "model": {
                       
-                      "primary": "nvidia-kimi/moonshotai/kimi-k2.5",
-                      "fallbacks": ["modal/zai-org/GLM-5-FP8", "ollama/opmo"]
+                      "primary": "nvidia/z-ai/glm-4.7",
+                      "fallbacks": ["llama.cpp/unsloth/qwen3.6-35b-a3b"]
                     },
                     "userTimezone": "UTC",
                     "timeoutSeconds": 600,
@@ -196,7 +174,7 @@ spec:
         data:
           enabled: true
           storageClass: "openebs-hostpath"
-          size: 1Gi
+          size: 10Gi
           accessMode: ReadWriteOnce
       # Configuración del Ingress para OpenClaw
       ingress:
@@ -217,7 +195,7 @@ spec:
         main:
           containers:
             main:
-              tag: 2026.3.1
+              tag: 2026.5.2
               envFrom:
                 - secretRef:
                     name: openclaw-env-secret
