@@ -1,3 +1,4 @@
+---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
@@ -7,6 +8,7 @@ spec:
   interval: 10m0s
   url: https://rook.github.io/helm-charts
 ---
+# Operador Rook
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -28,3 +30,67 @@ spec:
       retries: 3
   interval: 10m0s
   values: {}
+---
+# Cluster Ceph + pools + storage classes
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: rook-ceph-cluster
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: rook-ceph
+  releaseName: rook-ceph-cluster
+  chart:
+    spec:
+      chart: rook-ceph-cluster
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: rook-ceph
+  targetNamespace: rook-ceph
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  interval: 10m0s
+  values:
+    operatorNamespace: rook-ceph
+
+    cephClusterSpec:
+      dataDirHostPath: /var/lib/rook
+      mon:
+        count: 1
+        allowMultiplePerNode: false
+      mgr:
+        count: 1
+        allowMultiplePerNode: false
+      dashboard:
+        enabled: true
+        ssl: true
+      storage:
+        useAllNodes: false
+        useAllDevices: false
+        nodes:
+          - name: "debian"
+            devices:
+              - name: "/dev/sdb"
+          - name: "master2"
+            devices:
+              - name: "/dev/sdb"
+
+    cephBlockPools:
+      - name: ceph-block
+        spec:
+          failureDomain: host
+          replicated:
+            size: 2
+            requireSafeReplicaSize: false
+        storageClass:
+          enabled: true
+          name: ceph-block
+          isDefault: false
+          reclaimPolicy: Delete
+          allowVolumeExpansion: true
+          parameters:
+            csi.storage.k8s.io/fstype: ext4
