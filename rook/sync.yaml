@@ -90,23 +90,19 @@ spec:
         useAllNodes: false
         useAllDevices: false
         nodes:
-          - name: "debian"
-            devices:
-              - name: "/dev/sdb"
           - name: "master2"
             devices:
-              - name: "/dev/sdb"
+              - name: "/dev/sda"
 
     cephFileSystems:
       - name: ceph-filesystem
         spec:
           metadataPool:
             replicated:
-              size: 2
+              size: 1
           dataPools:
-            - failureDomain: host
-              replicated:
-                size: 2
+            - replicated:
+                size: 1
               name: data0
           metadataServer:
             activeCount: 1
@@ -132,10 +128,8 @@ spec:
     cephBlockPools:
       - name: ceph-block
         spec:
-          failureDomain: host
           replicated:
-            size: 2
-            requireSafeReplicaSize: false
+            size: 1
         storageClass:
           enabled: true
           name: ceph-block
