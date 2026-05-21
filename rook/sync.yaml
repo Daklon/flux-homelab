@@ -29,7 +29,17 @@ spec:
     remediation:
       retries: 3
   interval: 10m0s
-  values: {}
+  values:
+    csi:
+      kubeletDirPath: /var/lib/k0s/kubelet
+      pluginTolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+      provisionerTolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
 ---
 # Cluster Ceph + pools + storage classes
 apiVersion: helm.toolkit.fluxcd.io/v2
