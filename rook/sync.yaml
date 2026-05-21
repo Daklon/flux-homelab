@@ -78,6 +78,14 @@ spec:
       dashboard:
         enabled: true
         ssl: true
+      resources:
+        mon:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            cpu: 500m
+            memory: 2Gi
       storage:
         useAllNodes: false
         useAllDevices: false
@@ -88,6 +96,38 @@ spec:
           - name: "master2"
             devices:
               - name: "/dev/sdb"
+
+    cephFileSystems:
+      - name: ceph-filesystem
+        spec:
+          metadataPool:
+            replicated:
+              size: 2
+          dataPools:
+            - failureDomain: host
+              replicated:
+                size: 2
+              name: data0
+          metadataServer:
+            activeCount: 1
+            activeStandby: false
+            resources:
+              requests:
+                cpu: 500m
+                memory: 4Gi
+              limits:
+                cpu: 500m
+                memory: 4Gi
+            priorityClassName: system-cluster-critical
+        storageClass:
+          enabled: true
+          isDefault: false
+          name: ceph-filesystem
+          pool: data0
+          reclaimPolicy: Delete
+          allowVolumeExpansion: true
+          parameters:
+            csi.storage.k8s.io/fstype: ext4
 
     cephBlockPools:
       - name: ceph-block
