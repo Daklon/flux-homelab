@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - flux-system/
   - openebs/
-  #- rook/
+  - rook/
   - cert-manager/
   - metallb/
   - traefik/
