@@ -113,3 +113,100 @@ spec:
             namespace = "gitlab-runner"
             memory = "512m"
             cpu = "500m"
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gitlab-runner-2
+  namespace: flux-system
+spec:
+  releaseName: gitlab-runner-2
+
+  chart:
+    spec:
+      chart: gitlab-runner
+      version: "v0.88.1"
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: gitlab-runner
+
+  targetNamespace: gitlab-runner
+
+  install:
+    createNamespace: false
+
+  interval: 10m0s
+
+  values:
+    concurrency: 2
+
+    url: https://gitlab.com
+
+    tags:
+      - linux
+      - otro-runner
+
+    runUntainted: true
+    executor: kubernetes
+    privileged: true
+
+    kubernetes:
+      image: ubuntu:22.04
+      namespace: gitlab-runner
+      imagePullPolicy: IfNotPresent
+
+      serviceAccount: gitlab-runner
+
+      sidecarImages:
+        docker:
+          image: docker:24-dind
+          tag: latest
+          entrypoint: ["dockerd", "--host", "tcp://localhost:2375"]
+          volumeMounts:
+            - name: docker-config
+              mountPath: /etc/docker
+
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
+
+      nodeSelector: {}
+      tolerations: []
+      affinity: {}
+
+    rbac:
+      create: false
+      serviceAccountName: gitlab-runner
+
+    monitor:
+      prometheus:
+        servicemonitor:
+          enabled: false
+
+    dashboard:
+      enabled: false
+
+    logLevel: info
+
+    metrics:
+      enabled: true
+
+    runners:
+      secret: gitlab-runner-2-secret
+      concurrency: 10
+
+      config: |
+        [[runners]]
+          url = "https://gitlab.com"
+          request_concurrency = 10
+
+          [runners.kubernetes]
+            image = "ubuntu:22.04"
+            namespace = "gitlab-runner"
+            memory = "512m"
+            cpu = "500m"
