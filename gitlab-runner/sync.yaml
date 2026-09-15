@@ -145,6 +145,9 @@ spec:
     logLevel: info
     unregisterRunners: true
 
+    nodeSelector:
+      kubernetes.io/hostname: master2
+
     runners:
       secret: gitlab-runner-2-secret
       runUntagged: false
@@ -162,6 +165,7 @@ spec:
             helper_memory_limit = "256Mi"
             service_memory_limit = "1Gi"
             pull_policy = "if-not-present"
+            node_selector = "kubernetes.io/hostname=master2"
             poll_interval = 5
             poll_timeout = 600
 
