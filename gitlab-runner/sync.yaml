@@ -165,9 +165,11 @@ spec:
             helper_memory_limit = "256Mi"
             service_memory_limit = "1Gi"
             pull_policy = "if-not-present"
-            node_selector = "kubernetes.io/hostname=master2"
             poll_interval = 5
             poll_timeout = 600
+
+            [runners.kubernetes.node_selector]
+              "kubernetes.io/hostname" = "master2"
 
     rbac:
       create: false
