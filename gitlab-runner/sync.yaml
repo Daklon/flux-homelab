@@ -139,74 +139,35 @@ spec:
   interval: 10m0s
 
   values:
-    concurrency: 2
-
-    url: https://gitlab.com
-
-    tags:
-      - linux
-      - otro-runner
-
-    runUntainted: true
-    executor: kubernetes
-    privileged: true
-
-    kubernetes:
-      image: ubuntu:22.04
-      namespace: gitlab-runner
-      imagePullPolicy: IfNotPresent
-
-      serviceAccount: gitlab-runner
-
-      sidecarImages:
-        docker:
-          image: docker:24-dind
-          tag: latest
-          entrypoint: ["dockerd", "--host", "tcp://localhost:2375"]
-          volumeMounts:
-            - name: docker-config
-              mountPath: /etc/docker
-
-      resources:
-        requests:
-          cpu: 100m
-          memory: 128Mi
-        limits:
-          cpu: 500m
-          memory: 512Mi
-
-      nodeSelector: {}
-      tolerations: []
-      affinity: {}
-
-    rbac:
-      create: false
-      serviceAccountName: gitlab-runner
-
-    monitor:
-      prometheus:
-        servicemonitor:
-          enabled: false
-
-    dashboard:
-      enabled: false
-
+    gitlabUrl: https://gitlab.com
+    concurrent: 10
+    checkInterval: 3
     logLevel: info
-
-    metrics:
-      enabled: true
+    unregisterRunners: true
 
     runners:
       secret: gitlab-runner-2-secret
-      concurrency: 10
-
+      runUntagged: false
       config: |
         [[runners]]
-          url = "https://gitlab.com"
           request_concurrency = 10
 
           [runners.kubernetes]
             image = "ubuntu:22.04"
             namespace = "gitlab-runner"
-            memory = "512m"
-            cpu = "500m"
+            memory_request = "128Mi"
+            memory_limit = "2Gi"
+            cpu_request = "100m"
+            cpu_limit = "2"
+            helper_memory_limit = "256Mi"
+            service_memory_limit = "1Gi"
+            pull_policy = "if-not-present"
+            poll_interval = 5
+            poll_timeout = 600
+
+    rbac:
+      create: false
+      serviceAccountName: gitlab-runner
+
+    metrics:
+      enabled: true
