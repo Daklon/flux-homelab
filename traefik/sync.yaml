@@ -114,3 +114,9 @@ spec:
         protocol: TCP
         expose:
           default: true
+      frigate-api:
+        port: 5000
+        exposedPort: 5000
+        protocol: TCP
+        expose:
+          default: true

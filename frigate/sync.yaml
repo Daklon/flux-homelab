@@ -6,23 +6,6 @@ metadata:
 spec:
     interval: 10m0s
     url: https://blakeblackshear.github.io/blakeshome-charts/
-sops:
-    encrypted_regex: ^FRIGATE_MQTT_(USER|PASSWORD)$
-    lastmodified: "2026-10-08T11:29:17Z"
-    mac: ENC[AES256_GCM,data:fm9rRJzw3i8rrfiiCRYnHl4AnuDWRmrsDAuEU7EbAymZrJf9BYqQhS/dRX0kfMpUMQPnx9Gjvbbk1QrMGph0EQeDiUukv5zOzYko+Y4Gl1w+7xaeeDBsIYP7Z5bAe06HjgqKssmvqBGlcPcFYmrOb9P4pJiiNzoftfSd8i2HGJY=,iv:hAn5MTaM4blhYewbDZD6+XxtV60toqyV/0dcubcGX+c=,tag:FJSaodlxP+F+Z2v/ZvJrpw==,type:str]
-    pgp:
-        - created_at: "2026-10-08T11:29:17Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
-
-            hF4DwW+vaVwrS2ISAQdAI+0PqwNziTlURWiAaVGLnx4T19MXwTrhd5Qs7o3aTHww
-            Y1dUdSepSo2B7k0Tl4ROK/HKH49+7npL6h9/52F+HOV0rCktibxw2nE0Q4xsjNIT
-            0l4BEQxvLVsNuXglNTPEUbPRTrDrow6qQud8oFfnB87ufIVIxp7+XvLrYcomhMpN
-            rZU5kwOWn9AydW+LVfHpWWnIau0yHYsNuwSbNXKWHHaxzRmZ5XTsMa7WdOy8g0kp
-            =v/yj
-            -----END PGP MESSAGE-----
-          fp: B51175A0392C55BA3A9D508C914AB2CE60624E82
-    version: 3.13.3
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -66,9 +49,8 @@ spec:
             media:
                 enabled: true
                 storageClass: openebs-hostpath
-        env:
-            FRIGATE_MQTT_USER: ENC[AES256_GCM,data:XDRr/6UX6g==,iv:+utuysLFxysB9w+LS4c2taTvFoY1aGSraIDQapRb0zA=,tag:UvEEmfLHp1w3dzLFzMocSg==,type:str]
-            FRIGATE_MQTT_PASSWORD: ENC[AES256_GCM,data:viOiK3+5yCRNLmTU+QajXDPInU9s,iv:qc0qShBmR/kzjbrU2rCP5dTH+ANLHSI3xwNaixoRiAU=,tag:Dt4OVI6Txypvepvrp36BNw==,type:str]
+        envFromSecrets:
+            - frigate-mqtt-credentials
         config: |
             mqtt:
               enabled: true
@@ -176,20 +158,3 @@ spec:
                   width: 800
                   height: 448
             version: 0.17-0
-sops:
-    encrypted_regex: ^FRIGATE_MQTT_(USER|PASSWORD)$
-    lastmodified: "2026-10-08T11:29:17Z"
-    mac: ENC[AES256_GCM,data:fm9rRJzw3i8rrfiiCRYnHl4AnuDWRmrsDAuEU7EbAymZrJf9BYqQhS/dRX0kfMpUMQPnx9Gjvbbk1QrMGph0EQeDiUukv5zOzYko+Y4Gl1w+7xaeeDBsIYP7Z5bAe06HjgqKssmvqBGlcPcFYmrOb9P4pJiiNzoftfSd8i2HGJY=,iv:hAn5MTaM4blhYewbDZD6+XxtV60toqyV/0dcubcGX+c=,tag:FJSaodlxP+F+Z2v/ZvJrpw==,type:str]
-    pgp:
-        - created_at: "2026-10-08T11:29:17Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
-
-            hF4DwW+vaVwrS2ISAQdAI+0PqwNziTlURWiAaVGLnx4T19MXwTrhd5Qs7o3aTHww
-            Y1dUdSepSo2B7k0Tl4ROK/HKH49+7npL6h9/52F+HOV0rCktibxw2nE0Q4xsjNIT
-            0l4BEQxvLVsNuXglNTPEUbPRTrDrow6qQud8oFfnB87ufIVIxp7+XvLrYcomhMpN
-            rZU5kwOWn9AydW+LVfHpWWnIau0yHYsNuwSbNXKWHHaxzRmZ5XTsMa7WdOy8g0kp
-            =v/yj
-            -----END PGP MESSAGE-----
-          fp: B51175A0392C55BA3A9D508C914AB2CE60624E82
-    version: 3.13.3

@@ -1,0 +1,37 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: frigate-gateway
+  namespace: frigate
+spec:
+  gatewayClassName: traefik
+  listeners:
+    - name: frigate-https
+      protocol: HTTPS
+      port: 5000
+      hostname: frigate.plasm.es
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: firgate-tls
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: frigate-https
+  namespace: frigate
+spec:
+  parentRefs:
+    - name: frigate-gateway
+      sectionName: frigate-https
+  hostnames:
+    - frigate.plasm.es
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: frigate
+          port: 5000
