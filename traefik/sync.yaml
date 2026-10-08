@@ -120,3 +120,15 @@ spec:
         protocol: TCP
         expose:
           default: true
+      frigate-auth:
+        port: 8971
+        exposedPort: 8971
+        protocol: TCP
+        expose:
+          default: true
+      frigate-rtsp:
+        port: 8554
+        exposedPort: 8554
+        protocol: TCP
+        expose:
+          default: true
