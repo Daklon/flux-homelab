@@ -1,156 +1,195 @@
----
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: frigate
-  namespace: flux-system
+    name: frigate
+    namespace: flux-system
 spec:
-  interval: 10m0s
-  url: https://blakeblackshear.github.io/blakeshome-charts/
+    interval: 10m0s
+    url: https://blakeblackshear.github.io/blakeshome-charts/
+sops:
+    encrypted_regex: ^FRIGATE_MQTT_(USER|PASSWORD)$
+    lastmodified: "2026-10-08T11:29:17Z"
+    mac: ENC[AES256_GCM,data:fm9rRJzw3i8rrfiiCRYnHl4AnuDWRmrsDAuEU7EbAymZrJf9BYqQhS/dRX0kfMpUMQPnx9Gjvbbk1QrMGph0EQeDiUukv5zOzYko+Y4Gl1w+7xaeeDBsIYP7Z5bAe06HjgqKssmvqBGlcPcFYmrOb9P4pJiiNzoftfSd8i2HGJY=,iv:hAn5MTaM4blhYewbDZD6+XxtV60toqyV/0dcubcGX+c=,tag:FJSaodlxP+F+Z2v/ZvJrpw==,type:str]
+    pgp:
+        - created_at: "2026-10-08T11:29:17Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hF4DwW+vaVwrS2ISAQdAI+0PqwNziTlURWiAaVGLnx4T19MXwTrhd5Qs7o3aTHww
+            Y1dUdSepSo2B7k0Tl4ROK/HKH49+7npL6h9/52F+HOV0rCktibxw2nE0Q4xsjNIT
+            0l4BEQxvLVsNuXglNTPEUbPRTrDrow6qQud8oFfnB87ufIVIxp7+XvLrYcomhMpN
+            rZU5kwOWn9AydW+LVfHpWWnIau0yHYsNuwSbNXKWHHaxzRmZ5XTsMa7WdOy8g0kp
+            =v/yj
+            -----END PGP MESSAGE-----
+          fp: B51175A0392C55BA3A9D508C914AB2CE60624E82
+    version: 3.13.3
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: frigate
-  namespace: flux-system
+    name: frigate
+    namespace: flux-system
 spec:
-  releaseName: frigate
-  chart:
-    spec:
-      chart: frigate
-      version: '7.8.0'
-      reconcileStrategy: ChartVersion
-      sourceRef:
-        kind: HelmRepository
-        name: frigate
-  targetNamespace: frigate
-  install:
-    createNamespace: true
-    remediation:
-      retries: 1
-  interval: 10m0s
-  values:
-    replicaCount: 1
-    image:
-      tag: 0.17.0
-    ingress:
-      enabled: true
-      hosts: 
-        - host: frigate.plasm.es
-          paths:
-            - path: '/'
-              portName: http
-      tls:
-        - secretName: "firgate-tls"
-          hosts:
-            - frigate.plasm.es
-      annotations:
-        cert-manager.io/cluster-issuer: ovh
-    persistence:
-      media:
-        enabled: true
-        storageClass: "openebs-hostpath"
-    config: |
-      mqtt:
-        enabled: false
-      detectors:
-        ov:
-          type: openvino
-          device: CPU
-      auth:
-        enabled: false
-      proxy:
-        default_role: admin
-      objects:
-        track:
-        - person
-        - cat
-      model:
-        width: 300
-        height: 300
-        input_tensor: nhwc
-        input_pixel_format: bgr
-        path: /openvino-model/ssdlite_mobilenet_v2.xml
-        labelmap_path: /openvino-model/coco_91cl_bkgr.txt
+    releaseName: frigate
+    chart:
+        spec:
+            chart: frigate
+            version: 7.8.0
+            reconcileStrategy: ChartVersion
+            sourceRef:
+                kind: HelmRepository
+                name: frigate
+    targetNamespace: frigate
+    install:
+        createNamespace: true
+        remediation:
+            retries: 1
+    interval: 10m0s
+    values:
+        replicaCount: 1
+        image:
+            tag: 0.17.0
+        ingress:
+            enabled: true
+            hosts:
+                - host: frigate.plasm.es
+                  paths:
+                    - path: /
+                      portName: http
+            tls:
+                - secretName: firgate-tls
+                  hosts:
+                    - frigate.plasm.es
+            annotations:
+                cert-manager.io/cluster-issuer: ovh
+        persistence:
+            media:
+                enabled: true
+                storageClass: openebs-hostpath
+        env:
+            FRIGATE_MQTT_USER: ENC[AES256_GCM,data:XDRr/6UX6g==,iv:+utuysLFxysB9w+LS4c2taTvFoY1aGSraIDQapRb0zA=,tag:UvEEmfLHp1w3dzLFzMocSg==,type:str]
+            FRIGATE_MQTT_PASSWORD: ENC[AES256_GCM,data:viOiK3+5yCRNLmTU+QajXDPInU9s,iv:qc0qShBmR/kzjbrU2rCP5dTH+ANLHSI3xwNaixoRiAU=,tag:Dt4OVI6Txypvepvrp36BNw==,type:str]
+        config: |
+            mqtt:
+              enabled: true
+              host: 192.168.1.20:1883
+              user: "{FRIGATE_MQTT_USER}"
+              password: "{FRIGATE_MQTT_PASSWORD}"
+            detectors:
+              ov:
+                type: openvino
+                device: CPU
+            auth:
+              enabled: false
+            proxy:
+              default_role: admin
+            objects:
+              track:
+              - person
+              - cat
+            model:
+              width: 300
+              height: 300
+              input_tensor: nhwc
+              input_pixel_format: bgr
+              path: /openvino-model/ssdlite_mobilenet_v2.xml
+              labelmap_path: /openvino-model/coco_91cl_bkgr.txt
 
-      go2rtc:
-        streams:
-          smar1:
-            - rtsp://admin:admin@192.168.1.30:554/channel=0_stream=0&onvif=0.sdp?real_stream
-            - ffmpeg:back#audio=acc
-          smar1_sub:
-            - rtsp://admin:admin@192.168.1.30:554/channel=0_stream=1&onvif=0.sdp?real_stream
-            - ffmpeg:back#audio=acc
-          smar2:
-            - rtsp://admin:admin@192.168.1.31:554/channel=0_stream=0&onvif=0.sdp?real_stream
-            - ffmpeg:back#audio=acc
-          smar2_sub:
-            - rtsp://admin:admin@192.168.1.31:554/channel=0_stream=1&onvif=0.sdp?real_stream
-            - ffmpeg:back#audio=acc
-      record:
-        enabled: true
-        alerts:
-          retain:
-            days: 30
-            mode: motion
-        detections:
-          retain:
-            days: 30
-            mode: motion
-        continuous:
-          days: 3
-        motion:
-          days: 3
-      snapshots:
-        # Optional: Enable writing jpg snapshot to /media/frigate/clips (default: shown below)
-        enabled: true
-        # Optional: save a clean PNG copy of the snapshot image (default: shown below)
-        clean_copy: true
-        # Optional: print a timestamp on the snapshots (default: shown below)
-        timestamp: true
-        # Optional: draw bounding box on the snapshots (default: shown below)
-        bounding_box: true
-        # Optional: crop the snapshot (default: shown below)
-        crop: false
-        # Optional: quality of the encoded jpeg, 0-100 (default: shown below)
-        quality: 70
-      cameras:
-        smar1: # <------ Name the camera
-          enabled: true
-          ffmpeg:
-            output_args:
-              #record: preset-record-generic #eliminamos audio, ahora mismo no es compatible
-              record: preset-record-generic-audio-aac #reconvertimos audio, consume cpu
-            inputs:
-              - path: rtsp://127.0.0.1:8554/smar1 # <----- The stream you want to use for detection
-                input_args: preset-rtsp-restream
-                roles:
-                  - record
-              - path: rtsp://127.0.0.1:8554/smar1_sub
-                input_args: preset-rtsp-restream
-                roles:
-                  - detect
-          detect:
-            enabled: true # <---- disable detection until you have a working camera feed
-            width: 800
-            height: 448
-        smar2: # <------ Name the camera
-          enabled: true
-          ffmpeg:
-            output_args:
-              #record: preset-record-generic #eliminamos audio, ahora mismo no es compatible
-              record: preset-record-generic-audio-aac #reconvertimos audio, consume cpu
-            inputs:
-              - path: rtsp://127.0.0.1:8554/smar2 # <----- The stream you want to use for detection
-                input_args: preset-rtsp-restream
-                roles:
-                  - record
-              - path: rtsp://127.0.0.1:8554/smar2_sub
-                input_args: preset-rtsp-restream
-                roles:
-                  - detect
-          detect:
-            enabled: true # <---- disable detection until you have a working camera feed
-            width: 800
-            height: 448
-      version: 0.17-0
+            go2rtc:
+              streams:
+                smar1:
+                  - rtsp://admin:admin@192.168.1.30:554/channel=0_stream=0&onvif=0.sdp?real_stream
+                  - ffmpeg:back#audio=acc
+                smar1_sub:
+                  - rtsp://admin:admin@192.168.1.30:554/channel=0_stream=1&onvif=0.sdp?real_stream
+                  - ffmpeg:back#audio=acc
+                smar2:
+                  - rtsp://admin:admin@192.168.1.31:554/channel=0_stream=0&onvif=0.sdp?real_stream
+                  - ffmpeg:back#audio=acc
+                smar2_sub:
+                  - rtsp://admin:admin@192.168.1.31:554/channel=0_stream=1&onvif=0.sdp?real_stream
+                  - ffmpeg:back#audio=acc
+            record:
+              enabled: true
+              alerts:
+                retain:
+                  days: 30
+                  mode: motion
+              detections:
+                retain:
+                  days: 30
+                  mode: motion
+              continuous:
+                days: 3
+              motion:
+                days: 3
+            snapshots:
+              # Optional: Enable writing jpg snapshot to /media/frigate/clips (default: shown below)
+              enabled: true
+              # Optional: save a clean PNG copy of the snapshot image (default: shown below)
+              clean_copy: true
+              # Optional: print a timestamp on the snapshots (default: shown below)
+              timestamp: true
+              # Optional: draw bounding box on the snapshots (default: shown below)
+              bounding_box: true
+              # Optional: crop the snapshot (default: shown below)
+              crop: false
+              # Optional: quality of the encoded jpeg, 0-100 (default: shown below)
+              quality: 70
+            cameras:
+              smar1: # <------ Name the camera
+                enabled: true
+                ffmpeg:
+                  output_args:
+                    #record: preset-record-generic #eliminamos audio, ahora mismo no es compatible
+                    record: preset-record-generic-audio-aac #reconvertimos audio, consume cpu
+                  inputs:
+                    - path: rtsp://127.0.0.1:8554/smar1 # <----- The stream you want to use for detection
+                      input_args: preset-rtsp-restream
+                      roles:
+                        - record
+                    - path: rtsp://127.0.0.1:8554/smar1_sub
+                      input_args: preset-rtsp-restream
+                      roles:
+                        - detect
+                detect:
+                  enabled: true # <---- disable detection until you have a working camera feed
+                  width: 800
+                  height: 448
+              smar2: # <------ Name the camera
+                enabled: true
+                ffmpeg:
+                  output_args:
+                    #record: preset-record-generic #eliminamos audio, ahora mismo no es compatible
+                    record: preset-record-generic-audio-aac #reconvertimos audio, consume cpu
+                  inputs:
+                    - path: rtsp://127.0.0.1:8554/smar2 # <----- The stream you want to use for detection
+                      input_args: preset-rtsp-restream
+                      roles:
+                        - record
+                    - path: rtsp://127.0.0.1:8554/smar2_sub
+                      input_args: preset-rtsp-restream
+                      roles:
+                        - detect
+                detect:
+                  enabled: true # <---- disable detection until you have a working camera feed
+                  width: 800
+                  height: 448
+            version: 0.17-0
+sops:
+    encrypted_regex: ^FRIGATE_MQTT_(USER|PASSWORD)$
+    lastmodified: "2026-10-08T11:29:17Z"
+    mac: ENC[AES256_GCM,data:fm9rRJzw3i8rrfiiCRYnHl4AnuDWRmrsDAuEU7EbAymZrJf9BYqQhS/dRX0kfMpUMQPnx9Gjvbbk1QrMGph0EQeDiUukv5zOzYko+Y4Gl1w+7xaeeDBsIYP7Z5bAe06HjgqKssmvqBGlcPcFYmrOb9P4pJiiNzoftfSd8i2HGJY=,iv:hAn5MTaM4blhYewbDZD6+XxtV60toqyV/0dcubcGX+c=,tag:FJSaodlxP+F+Z2v/ZvJrpw==,type:str]
+    pgp:
+        - created_at: "2026-10-08T11:29:17Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hF4DwW+vaVwrS2ISAQdAI+0PqwNziTlURWiAaVGLnx4T19MXwTrhd5Qs7o3aTHww
+            Y1dUdSepSo2B7k0Tl4ROK/HKH49+7npL6h9/52F+HOV0rCktibxw2nE0Q4xsjNIT
+            0l4BEQxvLVsNuXglNTPEUbPRTrDrow6qQud8oFfnB87ufIVIxp7+XvLrYcomhMpN
+            rZU5kwOWn9AydW+LVfHpWWnIau0yHYsNuwSbNXKWHHaxzRmZ5XTsMa7WdOy8g0kp
+            =v/yj
+            -----END PGP MESSAGE-----
+          fp: B51175A0392C55BA3A9D508C914AB2CE60624E82
+    version: 3.13.3

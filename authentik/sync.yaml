@@ -7,23 +7,22 @@ spec:
     interval: 10m0s
     url: https://charts.goauthentik.io
 sops:
-    lastmodified: "2025-04-13T15:59:52Z"
-    mac: ENC[AES256_GCM,data:OritVYFsDTuBnfEtWcy5d0MkBSNQ5hkvNW1/0FztzYp9GliLILJEQ2mOCaT/oECAfmNzxcAhKilPIlKdN7qIgwcWE6TxatB3mM6iA3g3n5wE2yEQJs2YgmnLc4E+x683s7hnss1X1jDm+ug3RrHjPXq2vByxEFMo9iR/wwgOrd8=,iv:USaZ12Aj0lnIEuXeAMMo3CjuEXIi8XawNfz6Oy+JmSk=,tag:IvidCX6kK9+ve0bkrVIEHw==,type:str]
+    encrypted_regex: ^(data|stringData)$|password|secret_key
+    lastmodified: "2026-10-08T10:58:57Z"
+    mac: ENC[AES256_GCM,data:0hxUD5qfcYAE5nhlmPTsebjt9pKB91NQ9iSmeBUNLHkmsX3HMQB8u9Ox7jU/D7wCRVg3VguGqhUZexMzOhtwBiCf/a18vIfyDMItmZqVWiMlSxu0aqxLwGcIfLtDyfM5l3ivtmJpUdK10KfA/Ez+5UN5gXjeMByToTJFqRokTOQ=,iv:n+CsQmzwTWx4+/Kbfp7T0TuRKnPTj+WUyZ3LSt3MEuc=,tag:SKRhyqUNBke14OGSHA8Lcg==,type:str]
     pgp:
-        - created_at: "2025-04-13T13:37:26Z"
+        - created_at: "2026-10-08T10:58:57Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hF4DwW+vaVwrS2ISAQdAwSKBAh6cJI0Rl15AGj4Hpn4jaET8V4ncksQiP37wuHEw
-            nrCHWGUFrie8Yd+no92YrdrHFczq17ycU4+wLBs3vcuXn1uonoinfKT1thb0yuOE
-            1GgBCQIQvfbzyYLTxRl6ZqWCT6FUEDhDUoGxx1aqGHmMzCbpaLCnGYqTlIbr+oBG
-            DNDQ4kT7FMo5Hm2sAN7jKznJCMGwf2G5aG+SspgQ+ZYGZAxuhacdWGKJ6KKjX3/7
-            VSieXX3jb63gaw==
-            =VWXI
+            hF4DwW+vaVwrS2ISAQdAxCs2D5WaMZjss3u7ci8R7dBPMKnYHKWzDsXYXW6LMWgw
+            RZzN58zjFPT7YJ+rr6joQPjTyRFhsWHLV1wfpYaqeZNAkc/oTCTxUtw+MsNeXO7x
+            0l4BcKgan/Mm68A1/rwzI45/PuxDK4ZzviR/KqLooOKAoXYmBRW5kfp5odQwP9iB
+            cwcnZSy9KRJ53yg56wLNHvXRd/QQSGfh1zd1vAOQtT73hmcGfeE9mV5dpoPJu7Ae
+            =pA/P
             -----END PGP MESSAGE-----
           fp: B51175A0392C55BA3A9D508C914AB2CE60624E82
-    encrypted_regex: password|secret_key
-    version: 3.10.1
+    version: 3.13.3
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -48,26 +47,26 @@ spec:
     timeout: 10m
     values:
         authentik:
-            secret_key: ENC[AES256_GCM,data:95gwhua4Ko67RFNpHs7frRoJiBvwgsPeS688D9SP4QzGssU4G+8pAmFdvtieAWY9FdMMiFV8kz7VgHCIvlKc+fnE4I5RmnK+BKmyn3h1vRM=,iv:L6v8XImRy4APmqFcgcnyTDYqibqv3GNhCoy6ddq7ruE=,tag:4fu31BCI81S6P0OTUViqnQ==,type:str]
+            secret_key: ENC[AES256_GCM,data:ePSJOgl6izoRljhQsTVl8Lqv5cQS5bK5JNxTAsp/z9nuHsIzDtwvGnodlCbrQSPyPUnQvdezTXhNp/OU4owzFGbTiRwgQoHqXDXXCAvzAWQ=,iv:7pHBkGXupzr5xjcv5r7gMwJq62ZUQ2T8pjgl9sOuLLg=,tag:JGn44KujFI9d4kMHtD9rcA==,type:str]
             error_reporting:
                 enabled: false
             postgresql:
-                password: ENC[AES256_GCM,data:w7f4YHzmIj2cNBY0D1pijiKFMsQDDn984T2SeyLXx8eSEi3IHxHlKTWp50Ut6ORtYqjvWhcKgvJDXK9xQZiPZk/ercj4/tx/WNWSEewB+Iw=,iv:hVOUuOaCR6dHX/bv1tiKp0kKXt/Lsu/pQf5zZvTuZno=,tag:VzCLWD+sLxbd7mpb8eGdFg==,type:str]
+                password: ENC[AES256_GCM,data:7PUZvVIpch62kMDaeDBEifZ1oG4q/Rg6gkIKuk8VcFO2ApTcypKlmFxBHwjvf8nlvs+15DJ8A41YCCPnmuE8g/SkNWXfLWu5X7zAsfIMg3c=,iv:jcJ3rqiJzn3kI533q6Jna6VEAM563uc1WJRywfr/Iuw=,tag:saMPV/k5lJju8qps8PtNqw==,type:str]
         server:
             ingress:
                 enabled: true
                 hosts:
                     - auth.plasm.es
                 tls:
-                  - secretName: "authentik-tls"
-                    hosts:
-                      - auth.plasm.es
+                    - secretName: authentik-tls
+                      hosts:
+                        - auth.plasm.es
                 annotations:
-                  cert-manager.io/cluster-issuer: ovh
+                    cert-manager.io/cluster-issuer: ovh
         postgresql:
             enabled: true
             auth:
-                password: ENC[AES256_GCM,data:lSwZNAF/ISKdGXUNS6kB2tVSeuLU/elxQWddcpAwFDeT2Cr3+FYrbGzBbSPnTPCV/FuKHkkfhmFeT3sYNpQcX8kMICpXVe1i9k3k8FYa1wI=,iv:94TwA7z0spfpySdAKIkY8aJ212IOKuorlKGHjGswZ9s=,tag:U1VMCu9/KPnFLxpxAAzlcg==,type:str]
+                password: ENC[AES256_GCM,data:HXIT7Ee7e32UQ3BbOYvv38rPosY0J5rkTGWrASeRF3o3QSqlyZNlE7qbRU9IHjMx5OnF2gqH1vht9ZlAWGLMpiR5jRiXoyECdIq92mKirf8=,iv:PatVrlqVxd+o8XCf63XnZWx8yUMjRnyAgFYECw0L6Vc=,tag:b+ZclVnYXMU24T/2GF/ncQ==,type:str]
             primary:
                 persistence:
                     storageClass: openebs-hostpath
@@ -77,20 +76,19 @@ spec:
                 persistence:
                     storageClass: openebs-hostpath
 sops:
-    lastmodified: "2025-04-13T15:59:52Z"
-    mac: ENC[AES256_GCM,data:OritVYFsDTuBnfEtWcy5d0MkBSNQ5hkvNW1/0FztzYp9GliLILJEQ2mOCaT/oECAfmNzxcAhKilPIlKdN7qIgwcWE6TxatB3mM6iA3g3n5wE2yEQJs2YgmnLc4E+x683s7hnss1X1jDm+ug3RrHjPXq2vByxEFMo9iR/wwgOrd8=,iv:USaZ12Aj0lnIEuXeAMMo3CjuEXIi8XawNfz6Oy+JmSk=,tag:IvidCX6kK9+ve0bkrVIEHw==,type:str]
+    encrypted_regex: ^(data|stringData)$|password|secret_key
+    lastmodified: "2026-10-08T10:58:57Z"
+    mac: ENC[AES256_GCM,data:0hxUD5qfcYAE5nhlmPTsebjt9pKB91NQ9iSmeBUNLHkmsX3HMQB8u9Ox7jU/D7wCRVg3VguGqhUZexMzOhtwBiCf/a18vIfyDMItmZqVWiMlSxu0aqxLwGcIfLtDyfM5l3ivtmJpUdK10KfA/Ez+5UN5gXjeMByToTJFqRokTOQ=,iv:n+CsQmzwTWx4+/Kbfp7T0TuRKnPTj+WUyZ3LSt3MEuc=,tag:SKRhyqUNBke14OGSHA8Lcg==,type:str]
     pgp:
-        - created_at: "2025-04-13T13:37:26Z"
+        - created_at: "2026-10-08T10:58:57Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hF4DwW+vaVwrS2ISAQdAwSKBAh6cJI0Rl15AGj4Hpn4jaET8V4ncksQiP37wuHEw
-            nrCHWGUFrie8Yd+no92YrdrHFczq17ycU4+wLBs3vcuXn1uonoinfKT1thb0yuOE
-            1GgBCQIQvfbzyYLTxRl6ZqWCT6FUEDhDUoGxx1aqGHmMzCbpaLCnGYqTlIbr+oBG
-            DNDQ4kT7FMo5Hm2sAN7jKznJCMGwf2G5aG+SspgQ+ZYGZAxuhacdWGKJ6KKjX3/7
-            VSieXX3jb63gaw==
-            =VWXI
+            hF4DwW+vaVwrS2ISAQdAxCs2D5WaMZjss3u7ci8R7dBPMKnYHKWzDsXYXW6LMWgw
+            RZzN58zjFPT7YJ+rr6joQPjTyRFhsWHLV1wfpYaqeZNAkc/oTCTxUtw+MsNeXO7x
+            0l4BcKgan/Mm68A1/rwzI45/PuxDK4ZzviR/KqLooOKAoXYmBRW5kfp5odQwP9iB
+            cwcnZSy9KRJ53yg56wLNHvXRd/QQSGfh1zd1vAOQtT73hmcGfeE9mV5dpoPJu7Ae
+            =pA/P
             -----END PGP MESSAGE-----
           fp: B51175A0392C55BA3A9D508C914AB2CE60624E82
-    encrypted_regex: password|secret_key
-    version: 3.10.1
+    version: 3.13.3
