@@ -54,7 +54,7 @@ spec:
         config: |
             mqtt:
               enabled: true
-              host: 192.168.1.20:1883
+              host: 192.168.1.20
               user: "{FRIGATE_MQTT_USER}"
               password: "{FRIGATE_MQTT_PASSWORD}"
             detectors:
